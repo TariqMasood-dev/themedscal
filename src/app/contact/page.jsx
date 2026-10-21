@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -10,9 +9,11 @@ import {
 } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
+import { Magnetic } from "@/components/ui/Magnetic";
+import { WordReveal } from "@/components/ui/WordReveal";
 import { ContactForm } from "./ContactForm";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Contact",
   description:
     "Tell MedScale about your med spa and goals. We'll get back to you within one business day.",
@@ -46,15 +47,19 @@ export default function ContactPage() {
           </p>
           </Reveal>
           <Reveal delay={0.1}>
-          <h1
+          <WordReveal
+            as="h1"
             id="contact-page-heading"
             className="mx-auto mt-7 max-w-4xl text-4xl leading-[1.04] font-semibold tracking-[-0.06em] text-white sm:text-6xl lg:text-7xl"
-          >
-            Let&apos;s Grow Your{" "}
-            <span className="bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent">
-              Med Spa Together
-            </span>
-          </h1>
+            parts={[
+              "Let's Grow Your ",
+              {
+                text: "Med Spa Together",
+                className:
+                  "bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent",
+              },
+            ]}
+          />
           </Reveal>
           <Reveal delay={0.2}>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
@@ -176,16 +181,18 @@ export default function ContactPage() {
               Book a free consultation call and let&apos;s discuss your goals
               directly.
             </p>
-            <Link
-              href="/contact#contact-form"
-              className="group mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_28px_rgba(52,211,153,0.2)] transition duration-300 hover:scale-[1.03] hover:bg-emerald-200 hover:shadow-[0_0_40px_rgba(52,211,153,0.38)]"
-            >
-              Book a Free Consultation
-              <ArrowUpRight
-                aria-hidden="true"
-                className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </Link>
+            <Magnetic className="mt-7">
+              <Link
+                href="/contact#contact-form"
+                className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_28px_rgba(52,211,153,0.2)] transition duration-300 hover:bg-emerald-200 hover:shadow-[0_0_40px_rgba(52,211,153,0.38)]"
+              >
+                Book a Free Consultation
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </Link>
+            </Magnetic>
           </div>
           </Reveal>
       </section>

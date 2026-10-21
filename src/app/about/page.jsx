@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
   ArrowUpRight,
   Cpu,
@@ -7,29 +6,19 @@ import {
   Stethoscope,
   Target,
   TrendingUp,
-  type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "About MedScale",
   description:
     "Learn how MedScale combines healthcare understanding with creative expertise to help med spas grow online.",
 };
 
-interface MissionVision {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-}
-
-interface MissionVisionCardProps {
-  item: MissionVision;
-}
-
-const missionVision: readonly MissionVision[] = [
+const missionVision = [
   {
     title: "Our Mission",
     description:
@@ -44,11 +33,11 @@ const missionVision: readonly MissionVision[] = [
   },
 ];
 
-function MissionVisionCard({ item }: MissionVisionCardProps) {
+function MissionVisionCard({ item }) {
   const Icon = item.icon;
 
   return (
-    <article className="group relative h-full overflow-hidden rounded-[1.75rem] border border-white/[0.09] bg-slate-900/55 p-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1.5 hover:border-emerald-300/35 hover:bg-slate-900/75 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.1)] sm:p-9">
+    <article className="card-depth group relative h-full overflow-hidden rounded-[1.75rem] border border-white/[0.09] bg-slate-900/55 p-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1.5 hover:border-emerald-300/35 hover:bg-slate-900/75 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.1)] sm:p-9">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 -right-16 size-56 rounded-full bg-cyan-400/[0.045] blur-[85px] transition-colors duration-500 group-hover:bg-emerald-300/[0.12]"
@@ -68,17 +57,7 @@ function MissionVisionCard({ item }: MissionVisionCardProps) {
   );
 }
 
-interface Pillar {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-}
-
-interface PillarCardProps {
-  pillar: Pillar;
-}
-
-const pillars: readonly Pillar[] = [
+const pillars = [
   {
     title: "Healthcare-Focused Expertise",
     description:
@@ -105,11 +84,11 @@ const pillars: readonly Pillar[] = [
   },
 ];
 
-function PillarCard({ pillar }: PillarCardProps) {
+function PillarCard({ pillar }) {
   const Icon = pillar.icon;
 
   return (
-    <article className="group relative h-full overflow-hidden rounded-[1.5rem] border border-white/[0.09] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1.5 hover:border-emerald-300/35 hover:bg-slate-900/75 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.1)] sm:p-7">
+    <article className="card-depth group relative h-full overflow-hidden rounded-[1.5rem] border border-white/[0.09] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1.5 hover:border-emerald-300/35 hover:bg-slate-900/75 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.1)] sm:p-7">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 -right-16 size-52 rounded-full bg-cyan-400/[0.045] blur-[80px] transition-colors duration-500 group-hover:bg-emerald-300/[0.12]"
@@ -129,12 +108,7 @@ function PillarCard({ pillar }: PillarCardProps) {
   );
 }
 
-interface ImpactMetric {
-  value: string;
-  label: string;
-}
-
-const impactMetrics: readonly ImpactMetric[] = [
+const impactMetrics = [
   { value: "6", label: "Social Platforms Managed" },
   { value: "8+", label: "Aesthetic Industries Served" },
   { value: "100%", label: "Healthcare-Focused Team" },
@@ -169,15 +143,19 @@ export default function AboutPage() {
           </p>
           </Reveal>
           <Reveal delay={0.1}>
-          <h1
+          <WordReveal
+            as="h1"
             id="about-page-heading"
             className="mx-auto mt-7 max-w-4xl text-4xl leading-[1.04] font-semibold tracking-[-0.06em] text-white sm:text-6xl lg:text-7xl"
-          >
-            Healthcare Marketing{" "}
-            <span className="bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent">
-              Designed for Med Spas
-            </span>
-          </h1>
+            parts={[
+              "Healthcare Marketing ",
+              {
+                text: "Designed for Med Spas",
+                className:
+                  "bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent",
+              },
+            ]}
+          />
           </Reveal>
           <Reveal delay={0.2}>
           <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
@@ -197,7 +175,7 @@ export default function AboutPage() {
       >
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           {missionVision.map((item, index) => (
-            <Reveal key={item.title} delay={index * 0.1}>
+            <Reveal key={item.title} delay={index * 0.1} scale>
               <MissionVisionCard item={item} />
             </Reveal>
           ))}
@@ -222,7 +200,7 @@ export default function AboutPage() {
           </Reveal>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8">
             {pillars.map((pillar, index) => (
-              <Reveal key={pillar.title} delay={index * 0.1}>
+              <Reveal key={pillar.title} delay={index * 0.1} scale>
                 <PillarCard pillar={pillar} />
               </Reveal>
             ))}

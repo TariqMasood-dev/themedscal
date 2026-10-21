@@ -1,5 +1,6 @@
 import { ArrowUpRight, Check, Compass, FileVideo, Flag, Target } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
 const steps = [
   {
@@ -24,7 +25,7 @@ const steps = [
       "Deliver continuous brand impact, tracking optimization to support long-term goals.",
     icon: Flag,
   },
-] as const;
+];
 
 export function Path() {
   return (
@@ -38,13 +39,15 @@ export function Path() {
           <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-emerald-300 uppercase">
             The process
           </p>
-          <h2
+          <WordReveal
+            as="h2"
             id="path-heading"
             className="text-4xl leading-[1.07] font-semibold tracking-[-0.055em] text-white sm:text-6xl"
-          >
-            A Simple Path to a{" "}
-            <span className="text-slate-400">Stronger Online Presence</span>
-          </h2>
+            parts={[
+              "A Simple Path to a ",
+              { text: "Stronger Online Presence", className: "text-slate-400" },
+            ]}
+          />
         </Reveal>
 
         <div className="relative mt-16">

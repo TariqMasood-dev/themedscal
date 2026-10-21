@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -6,29 +5,18 @@ import {
   MessageCircle,
   Sparkles,
   TrendingUp,
-  type LucideIcon,
 } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Our Process",
   description:
     "See how MedScale takes your med spa from discovery to a consistent, measurable online presence.",
 };
 
-interface ProcessStep {
-  number: string;
-  title: string;
-  description: string;
-}
-
-interface ProcessStepCardProps {
-  step: ProcessStep;
-  index: number;
-}
-
-const processSteps: readonly ProcessStep[] = [
+const processSteps = [
   {
     number: "1",
     title: "Discovery",
@@ -55,11 +43,12 @@ const processSteps: readonly ProcessStep[] = [
   },
 ];
 
-function ProcessStepCard({ step, index }: ProcessStepCardProps) {
+function ProcessStepCard({ step, index }) {
   return (
     <Reveal
       as="li"
       delay={index * 0.1}
+      scale
       className="group relative flex gap-5 md:flex-col md:items-center md:gap-0 md:text-center"
     >
       <span className="relative z-10 grid size-12 shrink-0 place-items-center rounded-full border border-emerald-200/35 bg-slate-950 text-lg font-semibold text-emerald-200 shadow-[0_0_28px_rgba(52,211,153,0.16)] transition duration-300 group-hover:scale-110 group-hover:border-emerald-100/70 group-hover:bg-emerald-300/10 group-hover:shadow-[0_0_38px_rgba(52,211,153,0.3)] md:size-14">
@@ -77,17 +66,7 @@ function ProcessStepCard({ step, index }: ProcessStepCardProps) {
   );
 }
 
-interface Guarantee {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-}
-
-interface GuaranteeCardProps {
-  guarantee: Guarantee;
-}
-
-const guarantees: readonly Guarantee[] = [
+const guarantees = [
   {
     title: "Clear Communication",
     description:
@@ -108,11 +87,11 @@ const guarantees: readonly Guarantee[] = [
   },
 ];
 
-function GuaranteeCard({ guarantee }: GuaranteeCardProps) {
+function GuaranteeCard({ guarantee }) {
   const Icon = guarantee.icon;
 
   return (
-    <article className="group relative h-full overflow-hidden rounded-[1.5rem] border border-white/[0.09] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1.5 hover:border-emerald-300/35 hover:bg-slate-900/75 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.1)] sm:p-8">
+    <article className="card-depth group relative h-full overflow-hidden rounded-[1.5rem] border border-white/[0.09] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1.5 hover:border-emerald-300/35 hover:bg-slate-900/75 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.1)] sm:p-8">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 -right-16 size-52 rounded-full bg-cyan-400/[0.045] blur-[80px] transition-colors duration-500 group-hover:bg-emerald-300/[0.12]"
@@ -160,15 +139,19 @@ export default function ProcessPage() {
           </p>
           </Reveal>
           <Reveal delay={0.1}>
-          <h1
+          <WordReveal
+            as="h1"
             id="process-page-heading"
             className="mx-auto mt-7 max-w-4xl text-4xl leading-[1.04] font-semibold tracking-[-0.06em] text-white sm:text-6xl lg:text-7xl"
-          >
-            A Simple Path to a{" "}
-            <span className="bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent">
-              Stronger Online Presence
-            </span>
-          </h1>
+            parts={[
+              "A Simple Path to a ",
+              {
+                text: "Stronger Online Presence",
+                className:
+                  "bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent",
+              },
+            ]}
+          />
           </Reveal>
           <Reveal delay={0.2}>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">

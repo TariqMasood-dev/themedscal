@@ -7,38 +7,26 @@ import {
   useEffect,
   useMemo,
   useSyncExternalStore,
-  type ReactNode,
 } from "react";
 
-type Theme = "dark" | "light";
-
-interface ThemeContextValue {
-  theme: Theme;
-  toggleTheme: () => void;
-}
-
-interface ThemeProviderProps {
-  children: ReactNode;
-}
-
-const ThemeContext = createContext<ThemeContextValue | null>(null);
+const ThemeContext = createContext(null);
 const THEME_STORAGE_KEY = "medscale-theme";
 const THEME_CHANGE_EVENT = "medscale-theme-change";
 
-function subscribe(onStoreChange: () => void) {
+function subscribe(onStoreChange) {
   window.addEventListener(THEME_CHANGE_EVENT, onStoreChange);
   return () => window.removeEventListener(THEME_CHANGE_EVENT, onStoreChange);
 }
 
-function getThemeSnapshot(): Theme {
+function getThemeSnapshot() {
   return document.documentElement.dataset.theme === "light" ? "light" : "dark";
 }
 
-function getServerThemeSnapshot(): Theme {
+function getServerThemeSnapshot() {
   return "dark";
 }
 
-function applyTheme(theme: Theme) {
+function applyTheme(theme) {
   const root = document.documentElement;
   root.classList.toggle("dark", theme === "dark");
   root.classList.toggle("light", theme === "light");
@@ -46,7 +34,7 @@ function applyTheme(theme: Theme) {
   root.style.colorScheme = theme;
 }
 
-export function ThemeProvider({ children }: ThemeProviderProps) {
+export function ThemeProvider({ children }) {
   const theme = useSyncExternalStore(
     subscribe,
     getThemeSnapshot,

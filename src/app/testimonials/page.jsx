@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
   ArrowUpRight,
   Quote,
@@ -8,25 +7,15 @@ import {
 import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Testimonials",
   description:
     "Hear from aesthetic healthcare practices that partner with MedScale to grow their online presence.",
 };
 
-interface Testimonial {
-  quote: string;
-  name: string;
-  details: string;
-  initials: string;
-}
-
-interface TestimonialCardProps {
-  testimonial: Testimonial;
-}
-
-const testimonials: readonly Testimonial[] = [
+const testimonials = [
   {
     quote:
       "Our Instagram finally looks like the premium experience we deliver in the clinic. Bookings from social media have never been easier to track.",
@@ -50,9 +39,9 @@ const testimonials: readonly Testimonial[] = [
   },
 ];
 
-function TestimonialCard({ testimonial }: TestimonialCardProps) {
+function TestimonialCard({ testimonial }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.09] bg-slate-900/60 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1 hover:border-emerald-300/35 hover:bg-slate-900/80 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.12)] sm:p-8">
+    <article className="card-depth group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.09] bg-slate-900/60 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1 hover:border-emerald-300/35 hover:bg-slate-900/80 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.12)] sm:p-8">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-28 -right-20 size-64 rounded-full bg-cyan-400/[0.045] blur-[90px] transition-colors duration-500 group-hover:bg-emerald-300/[0.12]"
@@ -96,11 +85,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
   );
 }
 
-interface Brand {
-  name: string;
-}
-
-const brands: readonly Brand[] = [
+const brands = [
   { name: "Social Medispa" },
   { name: "Studio 3 Marketing" },
   { name: "Aesthetic Growth Labs" },
@@ -137,15 +122,19 @@ export default function TestimonialsPage() {
           </p>
           </Reveal>
           <Reveal delay={0.1}>
-          <h1
+          <WordReveal
+            as="h1"
             id="testimonials-page-heading"
             className="mx-auto mt-7 max-w-4xl text-4xl leading-[1.04] font-semibold tracking-[-0.06em] text-white sm:text-6xl lg:text-7xl"
-          >
-            Trusted by{" "}
-            <span className="bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent">
-              Growing Med Spas
-            </span>
-          </h1>
+            parts={[
+              "Trusted by ",
+              {
+                text: "Growing Med Spas",
+                className:
+                  "bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent",
+              },
+            ]}
+          />
           </Reveal>
           <Reveal delay={0.2}>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
@@ -162,7 +151,7 @@ export default function TestimonialsPage() {
       >
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
           {testimonials.map((testimonial, index) => (
-            <Reveal key={testimonial.name} delay={index * 0.1}>
+            <Reveal key={testimonial.name} delay={index * 0.1} scale>
               <TestimonialCard testimonial={testimonial} />
             </Reveal>
           ))}

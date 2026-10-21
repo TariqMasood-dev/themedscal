@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 
 const footerLinks = [
@@ -14,13 +15,9 @@ const footerLinks = [
   { href: "/testimonials", label: "Testimonials" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
-] as const;
+];
 
-interface FooterProps {
-  showCallout?: boolean;
-}
-
-export function Footer({ showCallout = true }: FooterProps) {
+export function Footer({ showCallout = true }) {
   const pathname = usePathname();
 
   return (
@@ -46,14 +43,16 @@ export function Footer({ showCallout = true }: FooterProps) {
                 Ready to Grow Your Med Spa?
               </h2>
             </div>
-            <Link
-              href="/contact"
-              className="group relative inline-flex min-h-12 shrink-0 items-center gap-2 overflow-hidden rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(52,211,153,0.2)] transition duration-300 hover:scale-[1.03] hover:bg-emerald-200 hover:shadow-[0_0_42px_rgba(52,211,153,0.4)]"
-            >
-              <span className="absolute inset-0 -translate-x-full bg-white/30 transition-transform duration-700 group-hover:translate-x-full" />
-              <span className="relative">Book a Free Consultation</span>
-              <ArrowUpRight aria-hidden="true" className="relative size-4" />
-            </Link>
+            <Magnetic className="shrink-0">
+              <Link
+                href="/contact"
+                className="group relative inline-flex min-h-12 items-center gap-2 overflow-hidden rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(52,211,153,0.2)] transition duration-300 hover:bg-emerald-200 hover:shadow-[0_0_42px_rgba(52,211,153,0.4)]"
+              >
+                <span className="absolute inset-0 -translate-x-full bg-white/30 transition-transform duration-700 group-hover:translate-x-full" />
+                <span className="relative">Book a Free Consultation</span>
+                <ArrowUpRight aria-hidden="true" className="relative size-4" />
+              </Link>
+            </Magnetic>
           </Reveal>
         )}
 

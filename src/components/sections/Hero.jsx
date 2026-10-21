@@ -6,6 +6,9 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
+import { Parallax } from "@/components/ui/Parallax";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 export function Hero() {
   return (
@@ -25,15 +28,19 @@ export function Hero() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1
+            <WordReveal
+              as="h1"
               id="hero-heading"
               className="max-w-3xl text-[clamp(2.7rem,6.2vw,5.7rem)] leading-[0.99] font-semibold tracking-[-0.065em] text-white"
-            >
-              Grow Your Med Spa and Aesthetic Clinic with{" "}
-              <span className="bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent">
-                Content That Attracts More Clients
-              </span>
-            </h1>
+              parts={[
+                "Grow Your Med Spa and Aesthetic Clinic with ",
+                {
+                  text: "Content That Attracts More Clients",
+                  className:
+                    "bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent",
+                },
+              ]}
+            />
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mt-7 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
@@ -45,16 +52,18 @@ export function Hero() {
           </Reveal>
           <Reveal delay={0.3}>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="/contact"
-              className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_26px_rgba(52,211,153,0.24)] transition duration-300 hover:scale-[1.03] hover:bg-emerald-200 hover:shadow-[0_0_38px_rgba(52,211,153,0.42)]"
-            >
-              Book a Free Consultation
-              <ArrowUpRight
-                aria-hidden="true"
-                className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </Link>
+            <Magnetic className="w-full sm:w-auto">
+              <Link
+                href="/contact"
+                className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_26px_rgba(52,211,153,0.24)] transition duration-300 hover:bg-emerald-200 hover:shadow-[0_0_38px_rgba(52,211,153,0.42)] sm:w-auto"
+              >
+                Book a Free Consultation
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </Link>
+            </Magnetic>
             <a
               href="#testimonials"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.035] px-6 py-3 text-sm font-medium text-white backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/[0.08]"
@@ -90,14 +99,14 @@ export function Hero() {
           />
           <div
             aria-hidden="true"
-            className="absolute top-[10%] left-[8%] size-2 rounded-full bg-cyan-200 shadow-[0_0_18px_rgba(103,232,249,0.9)] motion-safe:animate-[medscale-pulse_3s_ease-in-out_infinite]"
+            className="absolute top-[10%] left-[8%] size-2 transform-gpu rounded-full bg-cyan-200 shadow-[0_0_18px_rgba(103,232,249,0.9)] motion-safe:animate-[medscale-pulse_3s_ease-in-out_infinite]"
           />
           <div
             aria-hidden="true"
-            className="absolute right-[7%] bottom-[16%] size-1.5 rounded-full bg-emerald-200 shadow-[0_0_16px_rgba(110,231,183,0.9)] motion-safe:animate-[medscale-pulse_4s_ease-in-out_infinite]"
+            className="absolute right-[7%] bottom-[16%] size-1.5 transform-gpu rounded-full bg-emerald-200 shadow-[0_0_16px_rgba(110,231,183,0.9)] motion-safe:animate-[medscale-pulse_4s_ease-in-out_infinite]"
           />
 
-          <div className="relative w-[min(100%,31rem)] rotate-[-3deg] rounded-[2rem] border border-white/10 bg-slate-900/65 p-3 shadow-[0_35px_120px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-transform duration-700 hover:rotate-0 sm:p-4">
+          <Parallax className="relative w-[min(100%,31rem)] rotate-[-3deg] transform-gpu rounded-[2rem] border border-white/10 bg-slate-900/65 p-3 shadow-[0_35px_120px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-transform duration-700 hover:rotate-0 sm:p-4">
             <div className="overflow-hidden rounded-[1.45rem] border border-white/[0.07] bg-[#0c1518]">
               <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-4">
                 <div className="flex items-center gap-2">
@@ -177,9 +186,9 @@ export function Hero() {
                 </div>
               </div>
             </div>
-          </div>
+          </Parallax>
 
-          <div className="absolute -top-[1%] right-[-2%] flex items-center gap-3 rounded-2xl border border-emerald-200/25 bg-[var(--theme-card)]/90 px-4 py-3 shadow-[0_0_36px_rgba(16,185,129,0.18)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-emerald-200/45 motion-safe:animate-[medscale-float_6s_ease-in-out_1s_infinite] sm:right-[-4%]">
+          <Parallax className="absolute -top-[1%] right-[-2%] flex items-center gap-3 rounded-2xl border border-emerald-200/25 bg-[var(--theme-card)]/90 px-4 py-3 shadow-[0_0_36px_rgba(16,185,129,0.18)] backdrop-blur-xl transition-colors duration-300 hover:border-emerald-200/45 sm:right-[-4%]">
             <span className="grid size-9 place-items-center rounded-xl bg-emerald-300/10 text-emerald-200">
               <ChartNoAxesCombined aria-hidden="true" className="size-4" />
             </span>
@@ -191,15 +200,15 @@ export function Hero() {
                 +184%
               </span>
             </span>
-          </div>
+          </Parallax>
 
-          <div className="absolute right-0 bottom-[4%] flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/85 px-4 py-2.5 text-xs text-slate-200 shadow-lg backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-emerald-300/30 motion-safe:animate-[medscale-float_7s_ease-in-out_1.5s_infinite] sm:right-[-2%]">
+          <Parallax className="absolute right-0 bottom-[4%] flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/85 px-4 py-2.5 text-xs text-slate-200 shadow-lg backdrop-blur-xl transition-colors duration-300 hover:border-emerald-300/30 sm:right-[-2%]">
             <span className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-300 opacity-50" />
               <span className="relative inline-flex size-2 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(110,231,183,0.85)]" />
             </span>
             <span>Booking Early Watch</span>
-          </div>
+          </Parallax>
           </Reveal>
         </div>
     </section>

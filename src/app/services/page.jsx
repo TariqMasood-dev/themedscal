@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -6,32 +5,19 @@ import {
   Share2,
   Sparkles,
   Video,
-  type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Services",
   description:
     "Explore MedScale's social media management, video editing, AI video generation, and healthcare content services for med spas.",
 };
 
-interface Service {
-  badge: string;
-  title: string;
-  description: string;
-  bullets: readonly string[];
-  icon: LucideIcon;
-}
-
-interface ServiceCardProps {
-  service: Service;
-  index: string;
-}
-
-const services: readonly Service[] = [
+const services = [
   {
     badge: "Sm",
     title: "Social Media Management for Med Spas",
@@ -82,11 +68,11 @@ const services: readonly Service[] = [
   },
 ];
 
-function ServiceCard({ service, index }: ServiceCardProps) {
+function ServiceCard({ service, index }) {
   const Icon = service.icon;
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.09] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1.5 hover:border-emerald-300/35 hover:bg-slate-900/75 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.1)] focus-within:border-emerald-300/35 sm:p-8">
+    <article className="card-depth group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.09] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1.5 hover:border-emerald-300/35 hover:bg-slate-900/75 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.1)] focus-within:border-emerald-300/35 sm:p-8">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-28 -right-20 size-64 rounded-full bg-cyan-400/[0.045] blur-[90px] transition-colors duration-500 group-hover:bg-emerald-300/[0.12]"
@@ -162,15 +148,19 @@ export default function ServicesPage() {
           </p>
           </Reveal>
           <Reveal delay={0.1}>
-          <h1
+          <WordReveal
+            as="h1"
             id="services-page-heading"
             className="mx-auto mt-7 max-w-4xl text-4xl leading-[1.04] font-semibold tracking-[-0.06em] text-white sm:text-6xl lg:text-7xl"
-          >
-            Everything Your Med Spa Needs to{" "}
-            <span className="bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent">
-              Grow Online
-            </span>
-          </h1>
+            parts={[
+              "Everything Your Med Spa Needs to ",
+              {
+                text: "Grow Online",
+                className:
+                  "bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent",
+              },
+            ]}
+          />
           </Reveal>
           <Reveal delay={0.2}>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
@@ -188,7 +178,7 @@ export default function ServicesPage() {
       >
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-6 py-16 md:grid-cols-2">
           {services.map((service, index) => (
-            <Reveal key={service.title} delay={index * 0.1}>
+            <Reveal key={service.title} delay={index * 0.1} scale>
             <ServiceCard
               service={service}
               index={String(index + 1)}

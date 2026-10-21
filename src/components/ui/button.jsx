@@ -1,11 +1,6 @@
-import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
-export interface ButtonProps extends ComponentProps<"button"> {
-  variant?: "primary" | "secondary" | "ghost";
-}
-
-const variantClasses: Record<NonNullable<ButtonProps["variant"]>, string> = {
+const variantClasses = {
   primary:
     "bg-primary text-primary-foreground hover:bg-accent hover:text-primary-foreground",
   secondary:
@@ -18,7 +13,7 @@ export function Button({
   variant = "primary",
   type = "button",
   ...props
-}: ButtonProps) {
+}) {
   return (
     <button
       className={cn(

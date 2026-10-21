@@ -1,23 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 
-type RevealDirection = "up" | "down" | "left" | "right";
+const revealCallbacks = new Map();
+let sharedObserver = null;
 
-interface RevealProps {
-  children?: ReactNode;
-  className?: string;
-  delay?: number;
-  direction?: RevealDirection;
-  as?: "div" | "li" | "nav" | "dl";
-  scale?: boolean;
-  "aria-hidden"?: boolean;
-}
-
-const revealCallbacks = new Map<Element, () => void>();
-let sharedObserver: IntersectionObserver | null = null;
-
-function observeOnce(element: Element, reveal: () => void) {
+function observeOnce(element, reveal) {
   if (!("IntersectionObserver" in window)) {
     reveal();
     return () => {};
@@ -37,7 +25,7 @@ function observeOnce(element: Element, reveal: () => void) {
         sharedObserver = null;
       }
     },
-    { threshold: 0.05 },
+    { threshold: 0.01, rootMargin: "-10% 0px -10% 0px" },
   );
 
   revealCallbacks.set(element, reveal);
@@ -61,8 +49,8 @@ export function Reveal({
   as = "div",
   scale = false,
   "aria-hidden": ariaHidden,
-}: RevealProps) {
-  const elementRef = useRef<HTMLElement>(null);
+}) {
+  const elementRef = useRef(null);
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
@@ -73,7 +61,7 @@ export function Reveal({
 
   const style = {
     "--reveal-delay": `${delay}s`,
-  } as CSSProperties;
+  };
 
   const commonProps = {
     "data-reveal": "",
@@ -84,7 +72,7 @@ export function Reveal({
     className,
     style,
   };
-  const setElement = (element: HTMLElement | null) => {
+  const setElement = (element) => {
     elementRef.current = element;
   };
 

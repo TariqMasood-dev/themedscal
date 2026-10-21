@@ -5,6 +5,7 @@ import {
   ScanFace,
 } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
 const strengths = [
   {
@@ -31,7 +32,7 @@ const strengths = [
       "The display of digital design visualizes brand awareness, trust, tone, and generate more reservation from clients.",
     icon: ScanFace,
   },
-] as const;
+];
 
 export function IndustryFocus() {
   return (
@@ -45,13 +46,15 @@ export function IndustryFocus() {
             <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-emerald-300 uppercase">
               A different kind of partner
             </p>
-            <h2
+            <WordReveal
+              as="h2"
               id="industry-heading"
               className="text-4xl leading-[1.07] font-semibold tracking-[-0.055em] text-white sm:text-6xl"
-            >
-              We Understand the Aesthetic{" "}
-              <span className="text-slate-400">Healthcare Industry</span>
-            </h2>
+              parts={[
+                "We Understand the Aesthetic ",
+                { text: "Healthcare Industry", className: "text-slate-400" },
+              ]}
+            />
           </Reveal>
           <Reveal direction="right">
             <p className="max-w-sm text-sm leading-6 text-slate-400">
@@ -63,8 +66,8 @@ export function IndustryFocus() {
 
         <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {strengths.map(({ title, description, icon: Icon }, index) => (
-            <Reveal key={title} delay={index * 0.1}>
-              <article className="group relative min-h-64 h-full overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.03] p-6 backdrop-blur-xl transition duration-500 hover:scale-[1.025] hover:border-emerald-300/30 hover:bg-white/[0.055]">
+            <Reveal key={title} delay={index * 0.1} scale>
+              <article className="card-depth group relative min-h-64 h-full overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.03] p-6 backdrop-blur-xl transition duration-500 hover:scale-[1.025] hover:border-emerald-300/30 hover:bg-white/[0.055]">
               <div
                 aria-hidden="true"
                 className="absolute -right-16 -bottom-20 size-48 rounded-full bg-cyan-400/[0.04] blur-[65px] transition-colors group-hover:bg-emerald-300/[0.11]"

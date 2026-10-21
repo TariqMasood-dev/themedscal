@@ -1,30 +1,36 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { Reveal } from "@/components/ui/Reveal";
+import { accordionPanel, fadeUp, staggerContainer } from "@/lib/motion";
 
-export interface FaqItem {
-  question: string;
-  answer: string;
-}
-
-interface FaqAccordionProps {
-  items: readonly FaqItem[];
-}
-
-export function FaqAccordion({ items }: FaqAccordionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+export function FaqAccordion({ items }) {
+  const [openIndex, setOpenIndex] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
+  const panelVariants = shouldReduceMotion
+    ? {
+        closed: { height: 0, opacity: 0, transition: { duration: 0 } },
+        open: { height: "auto", opacity: 1, transition: { duration: 0 } },
+      }
+    : accordionPanel;
 
   return (
-    <div className="grid gap-4">
+    <motion.div
+      className="grid gap-4"
+      variants={staggerContainer}
+      initial={shouldReduceMotion ? false : "hidden"}
+      whileInView={shouldReduceMotion ? undefined : "visible"}
+      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+    >
       {items.map((item, index) => {
         const isOpen = openIndex === index;
         const answerId = `faq-answer-${index}`;
 
         return (
-          <Reveal key={item.question} delay={index * 0.08}>
-          <article
+          <motion.article
+            key={item.question}
+            variants={fadeUp}
             className={`group overflow-hidden rounded-2xl border bg-slate-900/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_18px_60px_rgba(0,0,0,0.15)] backdrop-blur-xl transition duration-300 ${
               isOpen
                 ? "border-emerald-300/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_20px_70px_rgba(16,185,129,0.08)]"
@@ -58,25 +64,22 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
                 </span>
               </button>
             </h2>
-            <div
+            <motion.div
               id={answerId}
               aria-hidden={!isOpen}
-              className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out motion-reduce:transition-none ${
-                isOpen
-                  ? "grid-rows-[1fr] opacity-100"
-                  : "grid-rows-[0fr] opacity-0"
-              }`}
+              inert={!isOpen}
+              variants={panelVariants}
+              initial={isOpen ? false : "closed"}
+              animate={isOpen ? "open" : "closed"}
+              className="overflow-hidden"
             >
-              <div className="overflow-hidden">
-                <p className="mx-5 border-t border-white/[0.08] py-5 text-sm leading-7 text-slate-400 sm:mx-7 sm:text-base sm:leading-7">
-                  {item.answer}
-                </p>
-              </div>
-            </div>
-          </article>
-          </Reveal>
+              <p className="mx-5 border-t border-white/[0.08] py-5 text-sm leading-7 text-slate-400 sm:mx-7 sm:text-base sm:leading-7">
+                {item.answer}
+              </p>
+            </motion.div>
+          </motion.article>
         );
       })}
-    </div>
+    </motion.div>
   );
 }

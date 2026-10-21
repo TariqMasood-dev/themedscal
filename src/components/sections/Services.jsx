@@ -5,20 +5,12 @@ import {
   Megaphone,
   Palette,
   Sparkles,
-  type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
-interface Service {
-  title: string;
-  description: string;
-  bullets: readonly string[];
-  icon: LucideIcon;
-  index: string;
-}
-
-const services: readonly Service[] = [
+const services = [
   {
     title: "Social Media Marketing",
     description:
@@ -85,13 +77,15 @@ export function Services() {
             <Sparkles aria-hidden="true" className="size-3.5" />
             Our Services
           </p>
-          <h2
+          <WordReveal
+            as="h2"
             id="services-heading"
             className="text-4xl leading-[1.08] font-semibold tracking-[-0.055em] text-white sm:text-6xl"
-          >
-            Everything Your Med Spa and Aesthetic Clinic Need to{" "}
-            <span className="text-slate-400">Grow Online</span>
-          </h2>
+            parts={[
+              "Everything Your Med Spa and Aesthetic Clinic Need to ",
+              { text: "Grow Online", className: "text-slate-400" },
+            ]}
+          />
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">
             From strategy to execution — watch content expand online,
             including: video, editing, and content creation... custom built
@@ -101,8 +95,8 @@ export function Services() {
 
         <div className="mt-12 grid gap-4 md:grid-cols-2">
           {services.map(({ title, description, bullets, icon: Icon, index }) => (
-            <Reveal key={title} delay={Number(index) * 0.1}>
-              <article className="group relative h-full overflow-hidden rounded-3xl border border-white/[0.08] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-emerald-300/40 hover:shadow-[0_18px_70px_rgba(16,185,129,0.09)] sm:p-8">
+            <Reveal key={title} delay={Number(index) * 0.1} scale>
+              <article className="card-depth group relative h-full overflow-hidden rounded-3xl border border-white/[0.08] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-emerald-300/40 hover:shadow-[0_18px_70px_rgba(16,185,129,0.09)] sm:p-8">
               <div
                 aria-hidden="true"
                 className="absolute -top-28 -right-24 size-64 rounded-full bg-cyan-400/[0.05] blur-[90px] transition duration-500 group-hover:bg-emerald-300/[0.11]"

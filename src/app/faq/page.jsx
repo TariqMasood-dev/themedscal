@@ -1,17 +1,18 @@
-import type { Metadata } from "next";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { FaqAccordion, type FaqItem } from "@/components/sections/FaqAccordion";
+import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
+import { Magnetic } from "@/components/ui/Magnetic";
+import { WordReveal } from "@/components/ui/WordReveal";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Frequently Asked Questions",
   description:
     "Answers to the questions Med Spa owners ask us most often about MedScale's marketing services.",
 };
 
-const faqItems: readonly FaqItem[] = [
+const faqItems = [
   {
     question: "Do you work only with Med Spas?",
     answer:
@@ -72,15 +73,19 @@ export default function FaqPage() {
           </p>
           </Reveal>
           <Reveal delay={0.1}>
-          <h1
+          <WordReveal
+            as="h1"
             id="faq-page-heading"
             className="mx-auto mt-7 max-w-4xl text-4xl leading-[1.04] font-semibold tracking-[-0.06em] text-white sm:text-6xl lg:text-7xl"
-          >
-            Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent">
-              Questions
-            </span>
-          </h1>
+            parts={[
+              "Frequently Asked ",
+              {
+                text: "Questions",
+                className:
+                  "bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent",
+              },
+            ]}
+          />
           </Reveal>
           <Reveal delay={0.2}>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg sm:leading-8">
@@ -125,16 +130,18 @@ export default function FaqPage() {
                 how MedScale can help.
               </p>
             </div>
-            <Link
-              href="/contact"
-              className="group inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_28px_rgba(52,211,153,0.2)] transition duration-300 hover:scale-[1.03] hover:bg-emerald-200 hover:shadow-[0_0_40px_rgba(52,211,153,0.38)]"
-            >
-              Book a Free Consultation
-              <ArrowUpRight
-                aria-hidden="true"
-                className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </Link>
+            <Magnetic className="shrink-0">
+              <Link
+                href="/contact"
+                className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_28px_rgba(52,211,153,0.2)] transition duration-300 hover:bg-emerald-200 hover:shadow-[0_0_40px_rgba(52,211,153,0.38)]"
+              >
+                Book a Free Consultation
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </Link>
+            </Magnetic>
           </div>
         </Reveal>
       </section>

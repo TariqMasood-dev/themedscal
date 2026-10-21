@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
+import { SmoothScrollProvider } from "@/providers/SmoothScrollProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: {
     default: "MedScale | Growth for Aesthetic Practices",
     template: "%s | MedScale",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark h-full antialiased" data-theme="dark">
       <body className="relative min-h-screen overflow-x-clip bg-[var(--theme-page)] text-slate-100">
@@ -26,10 +27,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <ThemeProvider>
-          <Navbar />
-          {children}
-        </ThemeProvider>
+        <SmoothScrollProvider>
+          <ThemeProvider>
+            <Navbar />
+            {children}
+          </ThemeProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

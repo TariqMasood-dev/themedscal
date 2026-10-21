@@ -1,5 +1,6 @@
 import { ArrowUpRight, Eye, HeartHandshake } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
 const principles = [
   {
@@ -16,7 +17,7 @@ const principles = [
       "To be the leading marketing partner for aesthetic healthcare business by deliver high-volume, high-quality digital marketing solutions.",
     icon: Eye,
   },
-] as const;
+];
 
 export function Mission() {
   return (
@@ -32,15 +33,18 @@ export function Mission() {
               <span className="h-px w-8 bg-emerald-300/70" />
               A partner with purpose
             </p>
-            <h2
+            <WordReveal
+              as="h2"
               id="mission-heading"
               className="max-w-3xl text-4xl leading-[1.06] font-semibold tracking-[-0.055em] text-white sm:text-6xl"
-            >
-              Healthcare Marketing Designed for{" "}
-              <span className="text-slate-400">
-                Med Spas and Aesthetic Clinics
-              </span>
-            </h2>
+              parts={[
+                "Healthcare Marketing Designed for ",
+                {
+                  text: "Med Spas and Aesthetic Clinics",
+                  className: "text-slate-400",
+                },
+              ]}
+            />
           </Reveal>
           <Reveal direction="right">
             <p className="max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
@@ -55,9 +59,9 @@ export function Mission() {
 
         <div className="mt-14 grid gap-4 md:grid-cols-2">
           {principles.map(({ number, title, description, icon: Icon }, index) => (
-            <Reveal key={title} delay={index * 0.12}>
+            <Reveal key={title} delay={index * 0.12} scale>
             <article
-              className="group relative h-full overflow-hidden rounded-3xl border border-white/[0.09] bg-white/[0.035] p-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-emerald-300/30 hover:bg-white/[0.055] sm:p-9"
+              className="card-depth group relative h-full overflow-hidden rounded-3xl border border-white/[0.09] bg-white/[0.035] p-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-emerald-300/30 hover:bg-white/[0.055] sm:p-9"
             >
               <div
                 aria-hidden="true"

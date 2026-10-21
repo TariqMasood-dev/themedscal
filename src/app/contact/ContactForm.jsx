@@ -1,17 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { Magnetic } from "@/components/ui/Magnetic";
 
-interface ContactFormValues {
-  fullName: string;
-  email: string;
-  phone: string;
-  practice: string;
-  message: string;
-}
-
-const initialValues: ContactFormValues = {
+const initialValues = {
   fullName: "",
   email: "",
   phone: "",
@@ -20,18 +13,15 @@ const initialValues: ContactFormValues = {
 };
 
 export function ContactForm() {
-  const [values, setValues] = useState<ContactFormValues>(initialValues);
+  const [values, setValues] = useState(initialValues);
   const [status, setStatus] = useState("");
 
-  function updateField<K extends keyof ContactFormValues>(
-    field: K,
-    value: ContactFormValues[K],
-  ) {
+  function updateField(field, value) {
     setValues((current) => ({ ...current, [field]: value }));
     setStatus("");
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event) {
     event.preventDefault();
 
     const subject = `MedScale consultation request from ${values.fullName}`;
@@ -153,16 +143,18 @@ export function ContactForm() {
       </div>
 
       <div className="sm:col-span-2">
-        <button
-          type="submit"
-          className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-teal-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_28px_rgba(52,211,153,0.2)] transition duration-300 hover:scale-[1.01] hover:from-emerald-200 hover:to-teal-200 hover:shadow-[0_0_40px_rgba(52,211,153,0.36)] sm:w-auto"
-        >
-          Send Message
-          <ArrowUpRight
-            aria-hidden="true"
-            className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-          />
-        </button>
+        <Magnetic className="w-full sm:w-auto">
+          <button
+            type="submit"
+            className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-teal-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_28px_rgba(52,211,153,0.2)] transition duration-300 hover:from-emerald-200 hover:to-teal-200 hover:shadow-[0_0_40px_rgba(52,211,153,0.36)] sm:w-auto"
+          >
+            Send Message
+            <ArrowUpRight
+              aria-hidden="true"
+              className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </button>
+        </Magnetic>
         <p
           role="status"
           aria-live="polite"

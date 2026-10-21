@@ -2,6 +2,7 @@
 
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
 const questions = [
   {
@@ -24,7 +25,7 @@ const questions = [
     answer:
       "Both. We can edit the custom footage your team provides, create AI-generated visual assets, or thoughtfully combine the two to match your brand and campaign goals.",
   },
-] as const;
+];
 
 export function Faq() {
   return (
@@ -38,13 +39,15 @@ export function Faq() {
           <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-emerald-300 uppercase">
             Good questions
           </p>
-          <h2
+          <WordReveal
+            as="h2"
             id="faq-heading"
             className="text-4xl leading-[1.07] font-semibold tracking-[-0.055em] text-white sm:text-6xl"
-          >
-            Frequently Asked{" "}
-            <span className="text-slate-400">Questions</span>
-          </h2>
+            parts={[
+              "Frequently Asked ",
+              { text: "Questions", className: "text-slate-400" },
+            ]}
+          />
           <p className="mt-5 max-w-sm text-sm leading-6 text-slate-400">
             A little more about how we help aesthetic practices show up with
             confidence.
@@ -71,7 +74,7 @@ export function Faq() {
                   <ChevronDown aria-hidden="true" className="size-4" />
                 </span>
               </summary>
-              <div className="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 group-open:grid-rows-[1fr] group-open:opacity-100 motion-reduce:transition-none">
+              <div className="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-open:grid-rows-[1fr] group-open:opacity-100 motion-reduce:transition-none">
                 <div className="overflow-hidden">
                   <p className="max-w-2xl pb-6 pr-8 text-sm leading-7 text-slate-400 sm:pb-7 sm:text-base">
                     {answer}

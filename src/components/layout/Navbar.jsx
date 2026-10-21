@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/providers/ThemeProvider";
@@ -17,9 +18,9 @@ const links = [
   { href: "/testimonials", label: "Testimonials" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
-] as const;
+];
 
-function isActiveLink(label: string, pathname: string) {
+function isActiveLink(label, pathname) {
   return (
     (label === "Home" && pathname === "/") ||
     (label === "Services" && pathname === "/services") ||
@@ -86,14 +87,16 @@ export function Navbar() {
               <Moon aria-hidden="true" className="size-4.5" />
             )}
           </Button>
-          <Link
-            href="/contact"
-            className="nav-cta group relative hidden items-center gap-2 overflow-hidden rounded-full bg-emerald-300 px-4 py-2.5 text-xs font-semibold text-slate-950 shadow-[0_0_22px_rgba(52,211,153,0.22)] transition duration-300 hover:scale-[1.03] hover:bg-emerald-200 hover:shadow-[0_0_34px_rgba(52,211,153,0.4)] sm:inline-flex"
-          >
-            <span className="absolute inset-0 -translate-x-full bg-white/30 transition-transform duration-700 group-hover:translate-x-full" />
-            <span className="relative">Book Free Consultation</span>
-            <ArrowUpRight aria-hidden="true" className="relative size-4" />
-          </Link>
+          <Magnetic className="nav-cta hidden sm:inline-flex">
+            <Link
+              href="/contact"
+              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-emerald-300 px-4 py-2.5 text-xs font-semibold text-slate-950 shadow-[0_0_22px_rgba(52,211,153,0.22)] transition duration-300 hover:bg-emerald-200 hover:shadow-[0_0_34px_rgba(52,211,153,0.4)]"
+            >
+              <span className="absolute inset-0 -translate-x-full bg-white/30 transition-transform duration-700 group-hover:translate-x-full" />
+              <span className="relative">Book Free Consultation</span>
+              <ArrowUpRight aria-hidden="true" className="relative size-4" />
+            </Link>
+          </Magnetic>
           <Button
             variant="ghost"
             aria-expanded={isOpen}

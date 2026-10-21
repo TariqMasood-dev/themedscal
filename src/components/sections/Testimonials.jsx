@@ -1,12 +1,13 @@
 import { Quote, Star } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { WordReveal } from "@/components/ui/WordReveal";
 
 const metrics = [
   { value: "6", label: "Social Platforms Managed" },
   { value: "8+", label: "Agency partners served" },
   { value: "100%", label: "Patient/Provider satisfaction" },
   { value: "4", label: "Key Case Studies Preview" },
-] as const;
+];
 
 const testimonials = [
   {
@@ -24,7 +25,7 @@ const testimonials = [
       "To get people excited to us, good consistency counts. We are very happy because they make high quality assets.",
     name: "Lead Injector",
   },
-] as const;
+];
 
 export function Testimonials() {
   return (
@@ -61,13 +62,15 @@ export function Testimonials() {
             <p className="mb-4 text-xs font-semibold tracking-[0.2em] text-emerald-300 uppercase">
               Trusted partner
             </p>
-            <h2
+            <WordReveal
+              as="h2"
               id="testimonials-heading"
               className="text-4xl leading-[1.07] font-semibold tracking-[-0.055em] text-white sm:text-6xl"
-            >
-              Trusted by Growing{" "}
-              <span className="text-slate-400">Med Spas</span>
-            </h2>
+              parts={[
+                "Trusted by Growing ",
+                { text: "Med Spas", className: "text-slate-400" },
+              ]}
+            />
           </Reveal>
           <Reveal direction="right">
             <p className="pb-1 text-sm text-slate-400">
@@ -78,8 +81,8 @@ export function Testimonials() {
 
         <div className="mt-9 grid gap-4 lg:grid-cols-3">
           {testimonials.map(({ quote, name }, index) => (
-            <Reveal key={name} delay={index * 0.1}>
-              <figure className="group relative flex min-h-64 h-full flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.035] p-6 backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-emerald-300/30 hover:bg-white/[0.06] sm:p-7">
+            <Reveal key={name} delay={index * 0.1} scale>
+              <figure className="card-depth group relative flex min-h-64 h-full flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.035] p-6 backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-emerald-300/30 hover:bg-white/[0.06] sm:p-7">
               <div
                 aria-hidden="true"
                 className="absolute -top-24 -right-16 size-48 rounded-full bg-emerald-300/[0.045] blur-[65px] transition-all duration-500 group-hover:bg-emerald-300/[0.12]"
