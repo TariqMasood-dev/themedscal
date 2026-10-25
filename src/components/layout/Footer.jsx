@@ -1,11 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { BrandLogo } from "@/components/layout/BrandLogo";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 
 const footerLinks = [
   { href: "/#home", label: "Home" },
@@ -18,16 +16,16 @@ const footerLinks = [
 ];
 
 export function Footer({ showCallout = true }) {
-  const pathname = usePathname();
-
   return (
     <footer
       id="contact"
-      className="relative flex flex-col justify-between overflow-hidden bg-black px-5 py-16 sm:px-8 lg:px-12"
+      data-scene="contact"
+      className="relative isolate flex flex-col justify-between overflow-hidden bg-black px-5 py-16 sm:px-8 lg:px-12"
     >
+      <SectionBackground src="/images/footer-spa-reception.webp" />
       <div
         aria-hidden="true"
-        className="absolute top-[-20rem] left-1/2 size-[38rem] -translate-x-1/2 rounded-full bg-emerald-500/[0.12] blur-[150px]"
+        className="ambient-orb ambient-orb-emerald absolute top-[-20rem] left-1/2 size-[38rem] -translate-x-1/2 rounded-full"
       />
       <div className="relative mx-auto w-full max-w-[90rem]">
         {showCallout && (
@@ -83,28 +81,7 @@ export function Footer({ showCallout = true }) {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    aria-current={
-                      (link.label === "About" && pathname === "/about") ||
-                      (link.label === "Process" && pathname === "/process") ||
-                      (link.label === "Testimonials" &&
-                        pathname === "/testimonials") ||
-                      (link.label === "FAQ" && pathname === "/faq") ||
-                      (link.label === "Contact" && pathname === "/contact") ||
-                      (link.label === "Services" && pathname === "/services")
-                        ? "page"
-                        : undefined
-                    }
-                    className={`text-sm transition-colors hover:text-emerald-200 ${
-                      (link.label === "About" && pathname === "/about") ||
-                      (link.label === "Process" && pathname === "/process") ||
-                      (link.label === "Testimonials" &&
-                        pathname === "/testimonials") ||
-                      (link.label === "FAQ" && pathname === "/faq") ||
-                      (link.label === "Contact" && pathname === "/contact") ||
-                      (link.label === "Services" && pathname === "/services")
-                        ? "font-medium text-emerald-200"
-                        : "text-slate-400"
-                    }`}
+                    className="text-sm text-slate-400 transition-colors hover:text-emerald-200"
                   >
                     {link.label}
                   </Link>

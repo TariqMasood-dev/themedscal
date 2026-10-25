@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 
 const services = [
   {
@@ -68,9 +69,11 @@ export function Services() {
   return (
     <section
       id="services"
+      data-scene="services"
       aria-labelledby="services-heading"
-      className="relative flex flex-col justify-center px-5 py-16 sm:px-8 md:py-24 lg:px-12"
+      className="relative isolate flex flex-col justify-center overflow-hidden px-5 py-16 sm:px-8 md:py-24 lg:px-12"
     >
+      <SectionBackground src="/images/home-services-skincare.webp" />
       <div className="mx-auto w-full max-w-7xl">
         <Reveal className="mx-auto max-w-3xl text-center">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/[0.07] px-3.5 py-2 text-[0.68rem] font-semibold tracking-[0.18em] text-emerald-200 uppercase">

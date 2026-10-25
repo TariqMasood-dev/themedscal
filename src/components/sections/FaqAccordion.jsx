@@ -1,37 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { accordionPanel, fadeUp, staggerContainer } from "@/lib/motion";
+import { fadeUp, staggerContainer } from "@/lib/motion";
 
 export function FaqAccordion({ items }) {
   const [openIndex, setOpenIndex] = useState(0);
   const shouldReduceMotion = useReducedMotion();
-  const panelVariants = shouldReduceMotion
-    ? {
-        closed: { height: 0, opacity: 0, transition: { duration: 0 } },
-        open: { height: "auto", opacity: 1, transition: { duration: 0 } },
-      }
-    : accordionPanel;
-
   return (
-    <motion.div
-      className="grid gap-4"
-      variants={staggerContainer}
-      initial={shouldReduceMotion ? false : "hidden"}
-      whileInView={shouldReduceMotion ? undefined : "visible"}
-      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
-    >
-      {items.map((item, index) => {
+    <LazyMotion features={domAnimation}>
+      <m.div
+        className="grid gap-4"
+        variants={staggerContainer}
+        initial={shouldReduceMotion ? false : "hidden"}
+        whileInView={shouldReduceMotion ? undefined : "visible"}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {items.map((item, index) => {
         const isOpen = openIndex === index;
         const answerId = `faq-answer-${index}`;
 
         return (
-          <motion.article
+          <m.article
             key={item.question}
             variants={fadeUp}
-            className={`group overflow-hidden rounded-2xl border bg-slate-900/55 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_18px_60px_rgba(0,0,0,0.15)] backdrop-blur-xl transition duration-300 ${
+            className={`group overflow-hidden rounded-2xl border bg-slate-900/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_12px_32px_rgba(0,0,0,0.15)] transition duration-300 ${
               isOpen
                 ? "border-emerald-300/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_20px_70px_rgba(16,185,129,0.08)]"
                 : "border-white/[0.08] hover:border-emerald-300/20"
@@ -64,22 +58,28 @@ export function FaqAccordion({ items }) {
                 </span>
               </button>
             </h2>
-            <motion.div
+            <m.div
               id={answerId}
               aria-hidden={!isOpen}
               inert={!isOpen}
-              variants={panelVariants}
-              initial={isOpen ? false : "closed"}
-              animate={isOpen ? "open" : "closed"}
+              initial={false}
+              animate={isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.24, ease: [0.16, 1, 0.3, 1] }
+              }
+              hidden={!isOpen}
               className="overflow-hidden"
             >
               <p className="mx-5 border-t border-white/[0.08] py-5 text-sm leading-7 text-slate-400 sm:mx-7 sm:text-base sm:leading-7">
                 {item.answer}
               </p>
-            </motion.div>
-          </motion.article>
+            </m.div>
+          </m.article>
         );
       })}
-    </motion.div>
+      </m.div>
+    </LazyMotion>
   );
 }

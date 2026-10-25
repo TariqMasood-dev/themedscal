@@ -66,7 +66,7 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-ring: var(--ring);
-  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
   --color-slate-100: var(--theme-foreground);
   --color-slate-200: var(--theme-strong);
   --color-slate-300: var(--theme-muted);
@@ -80,7 +80,7 @@
 }
 
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -149,6 +149,17 @@ html.motion-ready
   transform: translate3d(0, 0, 0);
 }
 
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .magnetic-target:hover {
+    transform: translate3d(
+        var(--magnetic-x, 0px),
+        var(--magnetic-y, 0px),
+        0
+      )
+      scale(1.04);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal],
   html.motion-ready [data-reveal][data-revealed="false"] {
@@ -176,32 +187,6 @@ html.motion-ready
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
-}
-
-@keyframes medscale-glow {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-main > div[aria-hidden="true"] > div {
-  animation:
-    medscale-glow 1.8s ease-out both,
-    medscale-float 18s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-main > div[aria-hidden="true"] > div:nth-child(2) {
-  animation-duration: 1.8s, 22s;
-  animation-delay: 0s, 1.5s;
-}
-
-main > div[aria-hidden="true"] > div:nth-child(3) {
-  animation-duration: 1.8s, 20s;
-  animation-delay: 0s, 3s;
 }
 
 .navbar-enter {
@@ -233,9 +218,18 @@ main > div[aria-hidden="true"] > div:nth-child(3) {
 html.theme-transition *,
 html.theme-transition *::before,
 html.theme-transition *::after {
-  transition-property: background-color, color, border-color, box-shadow !important;
+  transition-property: transform, opacity !important;
   transition-duration: 220ms !important;
   transition-timing-function: ease-in-out !important;
+}
+
+.transition,
+.transition-all,
+.transition-colors,
+.transition-opacity,
+.transition-shadow,
+.transition-transform {
+  transition-property: transform, opacity !important;
 }
 
 :root.light .bg-gradient-to-br {
@@ -256,7 +250,7 @@ body {
   min-height: 100%;
   background: var(--background);
   color: var(--foreground);
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -285,10 +279,6 @@ body {
     transition-duration: 0.01ms !important;
   }
 
-  main > div[aria-hidden="true"] > div {
-    animation: none;
-    will-change: auto;
-  }
 }
 
 .magnetic-target {
@@ -299,29 +289,126 @@ body {
     0
   );
   transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
 }
 
 .card-depth {
+  transform-style: preserve-3d;
   transition:
     transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
     border-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
 }
 
 .card-depth:hover {
-  transform: translate3d(0, -8px, 0);
+  transform: perspective(900px) rotateX(2deg) rotateY(-2deg)
+    translate3d(0, -8px, 0);
   border-color: rgba(110, 231, 183, 0.32);
   box-shadow: 0 0 25px rgba(20, 184, 166, 0.15);
 }
 
-@media (hover: none) and (prefers-reduced-motion: no-preference) {
-  main > div[aria-hidden="true"] > div {
-    animation: medscale-glow 1.8s ease-out both;
-    will-change: auto;
-  }
+.ambient-orb {
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
 
+.ambient-orb-cyan {
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(6, 182, 212, 0.13),
+    transparent 72%
+  );
+}
+
+.ambient-orb-emerald {
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(16, 185, 129, 0.12),
+    transparent 72%
+  );
+}
+
+.ambient-orb-blue {
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(29, 78, 216, 0.12),
+    transparent 72%
+  );
+}
+
+main {
+  background-image:
+    radial-gradient(ellipse at 16% 8%, rgba(6, 182, 212, 0.09), transparent 32%),
+    radial-gradient(ellipse at 92% 42%, rgba(16, 185, 129, 0.075), transparent 34%),
+    radial-gradient(ellipse at 32% 92%, rgba(29, 78, 216, 0.075), transparent 32%);
+}
+
+.canvas-background-fallback {
+  background:
+    radial-gradient(ellipse at 48% 48%, rgba(13, 148, 136, 0.1), transparent 58%),
+    linear-gradient(140deg, rgba(2, 6, 23, 0.15), rgba(6, 20, 23, 0.3));
+}
+
+.section-background-fallback {
+  background:
+    radial-gradient(ellipse at 15% 25%, rgba(13, 148, 136, 0.12), transparent 48%),
+    linear-gradient(
+      135deg,
+      rgba(7, 21, 19, 0.25) 0%,
+      rgba(11, 29, 27, 0.25) 48%,
+      rgba(11, 23, 32, 0.25) 100%
+    );
+}
+
+.section-background-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(2, 6, 23, 0.44) 0%,
+    rgba(2, 6, 23, 0.55) 55%,
+    rgba(2, 6, 23, 0.64) 100%
+  );
+}
+
+:root.light .section-background-fallback {
+  background:
+    radial-gradient(ellipse at 15% 25%, rgba(13, 148, 136, 0.08), transparent 48%),
+    linear-gradient(
+      135deg,
+      rgba(248, 250, 252, 0.2) 0%,
+      rgba(240, 253, 250, 0.2) 48%,
+      rgba(236, 254, 255, 0.2) 100%
+    );
+}
+
+:root.light .section-background-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(248, 250, 252, 0.34) 0%,
+    rgba(248, 250, 252, 0.42) 55%,
+    rgba(248, 250, 252, 0.5) 100%
+  );
+}
+
+.backdrop-blur-xl {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+[class*="blur-[100px]"],
+[class*="blur-[90px]"],
+[class*="blur-[85px]"],
+[class*="blur-[80px]"],
+[class*="blur-[70px]"],
+[class*="blur-[65px]"] {
+  filter: blur(24px);
+}
+
+main > section:not(:first-of-type),
+main > div > section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
   .magnetic-target {
     transform: none;
     transition: none;
@@ -379,15 +466,5 @@ body {
   }
   to {
     transform: scaleX(1);
-  }
-}
-
-@keyframes medscale-float {
-  from {
-    transform: translate3d(0, -10px, 0);
-  }
-
-  to {
-    transform: translate3d(0, 10px, 0);
   }
 }

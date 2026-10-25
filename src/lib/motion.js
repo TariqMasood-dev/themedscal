@@ -18,17 +18,3 @@ export const fadeUp = {
     },
   },
 };
-
-export const accordionPanel = {
-  closed: { height: 0, opacity: 0 },
-  open: {
-    height: "auto",
-    opacity: 1,
-    transition: { type: "spring", stiffness: 300, damping: 30 },
-  },
-  exit: {
-    height: 0,
-    opacity: 0,
-    transition: { type: "spring", stiffness: 300, damping: 30 },
-  },
-};

@@ -1,6 +1,7 @@
 import { ArrowUpRight, Check, Compass, FileVideo, Flag, Target } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 
 const steps = [
   {
@@ -31,9 +32,11 @@ export function Path() {
   return (
     <section
       id="process"
+      data-scene="process"
       aria-labelledby="path-heading"
-      className="relative flex flex-col justify-center px-5 py-16 sm:px-8 md:py-24 lg:px-12"
+      className="relative isolate flex flex-col justify-center overflow-hidden px-5 py-16 sm:px-8 md:py-24 lg:px-12"
     >
+      <SectionBackground src="/images/home-process-hallway.webp" />
       <div className="mx-auto w-full max-w-7xl">
         <Reveal className="max-w-3xl">
           <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-emerald-300 uppercase">

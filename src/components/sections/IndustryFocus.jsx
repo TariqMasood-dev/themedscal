@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 
 const strengths = [
   {
@@ -37,9 +38,11 @@ const strengths = [
 export function IndustryFocus() {
   return (
     <section
+      data-scene="about"
       aria-labelledby="industry-heading"
-      className="relative flex flex-col justify-center px-5 py-16 sm:px-8 md:py-24 lg:px-12"
+      className="relative isolate flex flex-col justify-center overflow-hidden px-5 py-16 sm:px-8 md:py-24 lg:px-12"
     >
+      <SectionBackground src="/images/industry-clinic-detail.avif" />
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <Reveal className="max-w-3xl">

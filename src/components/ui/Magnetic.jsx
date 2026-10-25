@@ -1,32 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-
 export function Magnetic({ children, className }) {
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    const finePointer = window.matchMedia(
-      "(hover: hover) and (pointer: fine)",
-    );
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
-    const update = () => setEnabled(finePointer.matches && !reducedMotion.matches);
-
-    update();
-    finePointer.addEventListener("change", update);
-    reducedMotion.addEventListener("change", update);
-
-    return () => {
-      finePointer.removeEventListener("change", update);
-      reducedMotion.removeEventListener("change", update);
-    };
-  }, []);
-
   function handlePointerMove(event) {
-    if (!enabled || event.pointerType !== "mouse") return;
+    if (event.pointerType !== "mouse") return;
 
     const bounds = event.currentTarget.getBoundingClientRect();
     const offsetX = (event.clientX - bounds.left - bounds.width / 2) * 0.12;
@@ -48,18 +24,12 @@ export function Magnetic({ children, className }) {
   }
 
   return (
-    <motion.span
-      className={`inline-flex ${className ?? ""}`}
-      whileHover={enabled ? { scale: 1.04 } : undefined}
-      transition={{ type: "spring", stiffness: 250, damping: 15 }}
+    <span
+      className={`magnetic-target ${className ?? ""}`}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPosition}
     >
-      <span
-        className={`magnetic-target ${className ?? ""}`}
-        onPointerMove={handlePointerMove}
-        onPointerLeave={resetPosition}
-      >
-        {children}
-      </span>
-    </motion.span>
+      {children}
+    </span>
   );
 }

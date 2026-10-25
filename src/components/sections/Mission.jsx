@@ -1,6 +1,7 @@
 import { ArrowUpRight, Eye, HeartHandshake } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 
 const principles = [
   {
@@ -23,9 +24,11 @@ export function Mission() {
   return (
     <section
       id="about"
+      data-scene="about"
       aria-labelledby="mission-heading"
-      className="relative flex flex-col justify-center px-6 py-16 sm:px-8 md:py-24 lg:px-12"
+      className="relative isolate flex flex-col justify-center overflow-hidden px-6 py-16 sm:px-8 md:py-24 lg:px-12"
     >
+      <SectionBackground src="/images/mission-consultation.webp" />
       <div className="mx-auto w-full max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-20">
           <Reveal>

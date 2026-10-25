@@ -10,6 +10,8 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
+import { SectionBackground } from "@/components/ui/SectionBackground";
+import { SceneBackground } from "@/components/canvas/SceneBackground";
 
 export const metadata = {
   title: "Services",
@@ -127,19 +129,14 @@ export default function ServicesPage() {
       tabIndex={-1}
       className="relative isolate min-h-screen overflow-x-clip bg-[var(--theme-page)] text-slate-100 selection:bg-emerald-300/30"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-      >
-        <div className="absolute -top-56 left-[12%] size-[38rem] rounded-full bg-cyan-500/[0.09] blur-[145px]" />
-        <div className="absolute top-[38%] -right-64 size-[40rem] rounded-full bg-emerald-500/[0.08] blur-[150px]" />
-        <div className="absolute -bottom-72 left-[20%] size-[34rem] rounded-full bg-blue-700/[0.09] blur-[145px]" />
-      </div>
-
+      <SceneBackground />
+      <div className="relative z-10">
       <section
         aria-labelledby="services-page-heading"
-        className="px-5 pt-32 pb-6 sm:px-8 sm:pt-40 lg:px-12 lg:pt-44"
+        data-scene="services"
+        className="relative isolate overflow-hidden px-5 pt-32 pb-6 sm:px-8 sm:pt-40 lg:px-12 lg:pt-44"
       >
+        <SectionBackground src="/images/services-hero-skincare.avif" />
         <div className="mx-auto max-w-6xl text-center">
           <Reveal className="inline-flex">
           <p className="inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/[0.07] px-3.5 py-2 text-[0.68rem] font-semibold tracking-[0.19em] text-emerald-200 uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-md">
@@ -174,8 +171,10 @@ export default function ServicesPage() {
 
       <section
         aria-label="MedScale services"
-        className="px-0 pb-16 sm:pb-20"
+        data-scene="services"
+        className="relative isolate overflow-hidden px-0 pb-16 sm:pb-20"
       >
+        <SectionBackground src="/images/services-grid-clinic-detail.webp" />
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-6 py-16 md:grid-cols-2">
           {services.map((service, index) => (
             <Reveal key={service.title} delay={index * 0.1} scale>
@@ -202,8 +201,10 @@ export default function ServicesPage() {
 
       <section
         aria-labelledby="services-cta-heading"
-        className="px-5 pb-20 sm:px-8 lg:px-12"
+        data-scene="services"
+        className="relative isolate overflow-hidden px-5 pb-20 sm:px-8 lg:px-12"
       >
+        <SectionBackground src="/images/services-cta-consultation.webp" />
         <Reveal scale className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-900 via-[#0c171a] to-[#07100f] px-6 py-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_25px_100px_rgba(0,0,0,0.35)] sm:px-12 sm:py-16">
           <div
             aria-hidden="true"
@@ -244,6 +245,7 @@ export default function ServicesPage() {
       </section>
 
       <Footer showCallout={false} />
+      </div>
     </main>
   );
 }

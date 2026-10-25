@@ -1,6 +1,7 @@
 import { Quote, Star } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 
 const metrics = [
   { value: "6", label: "Social Platforms Managed" },
@@ -31,9 +32,11 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
+      data-scene="testimonials"
       aria-labelledby="testimonials-heading"
-      className="relative flex flex-col justify-center px-5 py-16 sm:px-8 md:py-24 lg:px-12"
+      className="relative isolate flex flex-col justify-center overflow-hidden px-5 py-16 sm:px-8 md:py-24 lg:px-12"
     >
+      <SectionBackground src="/images/home-testimonial-texture.webp" />
       <div className="mx-auto w-full max-w-7xl">
         <Reveal
           as="dl"

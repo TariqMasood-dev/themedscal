@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-const revealCallbacks = new Map();
+const observedElements = new Set();
 let sharedObserver = null;
 
-function observeOnce(element, reveal) {
+function observeOnce(element) {
   if (!("IntersectionObserver" in window)) {
-    reveal();
+    element.dataset.revealed = "true";
     return () => {};
   }
 
@@ -15,12 +15,12 @@ function observeOnce(element, reveal) {
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
-        revealCallbacks.get(entry.target)?.();
-        revealCallbacks.delete(entry.target);
+        entry.target.dataset.revealed = "true";
+        observedElements.delete(entry.target);
         sharedObserver?.unobserve(entry.target);
       }
 
-      if (revealCallbacks.size === 0) {
+      if (observedElements.size === 0) {
         sharedObserver?.disconnect();
         sharedObserver = null;
       }
@@ -28,13 +28,13 @@ function observeOnce(element, reveal) {
     { threshold: 0.01, rootMargin: "-10% 0px -10% 0px" },
   );
 
-  revealCallbacks.set(element, reveal);
+  observedElements.add(element);
   sharedObserver.observe(element);
 
   return () => {
-    revealCallbacks.delete(element);
+    observedElements.delete(element);
     sharedObserver?.unobserve(element);
-    if (revealCallbacks.size === 0) {
+    if (observedElements.size === 0) {
       sharedObserver?.disconnect();
       sharedObserver = null;
     }
@@ -51,12 +51,10 @@ export function Reveal({
   "aria-hidden": ariaHidden,
 }) {
   const elementRef = useRef(null);
-  const [revealed, setRevealed] = useState(false);
-
   useEffect(() => {
     const element = elementRef.current;
     if (!element) return;
-    return observeOnce(element, () => setRevealed(true));
+    return observeOnce(element);
   }, []);
 
   const style = {
@@ -65,7 +63,7 @@ export function Reveal({
 
   const commonProps = {
     "data-reveal": "",
-    "data-revealed": revealed,
+    "data-revealed": "false",
     "data-reveal-direction": direction,
     "data-reveal-scale": scale ? "true" : undefined,
     "aria-hidden": ariaHidden,

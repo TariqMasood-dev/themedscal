@@ -1,8 +1,7 @@
-"use client";
-
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 
 const questions = [
   {
@@ -31,9 +30,11 @@ export function Faq() {
   return (
     <section
       id="faq"
+      data-scene="faq"
       aria-labelledby="faq-heading"
-      className="relative flex flex-col justify-center px-5 py-16 sm:px-8 md:py-24 lg:px-12"
+      className="relative isolate flex flex-col justify-center overflow-hidden px-5 py-16 sm:px-8 md:py-24 lg:px-12"
     >
+      <SectionBackground src="/images/home-faq-serene-room.avif" />
       <div className="mx-auto grid w-full max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
         <Reveal className="lg:h-fit">
           <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-emerald-300 uppercase">
@@ -74,7 +75,7 @@ export function Faq() {
                   <ChevronDown aria-hidden="true" className="size-4" />
                 </span>
               </summary>
-              <div className="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-open:grid-rows-[1fr] group-open:opacity-100 motion-reduce:transition-none">
+              <div className="grid grid-rows-[0fr] opacity-0 transition-opacity duration-200 group-open:grid-rows-[1fr] group-open:opacity-100 motion-reduce:transition-none">
                 <div className="overflow-hidden">
                   <p className="max-w-2xl pb-6 pr-8 text-sm leading-7 text-slate-400 sm:pb-7 sm:text-base">
                     {answer}

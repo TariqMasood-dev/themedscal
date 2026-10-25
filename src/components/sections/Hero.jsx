@@ -7,16 +7,18 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
-import { Parallax } from "@/components/ui/Parallax";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 
 export function Hero() {
   return (
     <section
       id="home"
+      data-scene="hero"
       aria-labelledby="hero-heading"
-      className="relative flex items-center overflow-hidden px-5 pt-24 pb-16 sm:px-8 sm:pt-28 sm:pb-20 lg:px-12 lg:py-24"
+      className="relative isolate flex items-center overflow-hidden px-5 pt-24 pb-16 sm:px-8 sm:pt-28 sm:pb-20 lg:px-12 lg:py-24"
     >
+      <SectionBackground src="/images/hero-treatment-suite.avif" priority />
       <div className="mx-auto grid w-full max-w-[90rem] items-center gap-14 lg:grid-cols-2 lg:gap-10">
         <div className="relative z-10">
           <Reveal className="mb-7 inline-flex max-w-full">
@@ -91,11 +93,11 @@ export function Hero() {
 
         <Reveal
           direction="right"
-          className="relative mx-auto flex min-h-[27rem] w-full max-w-[38rem] items-center justify-center sm:min-h-[34rem]"
+          className="relative isolate mx-auto flex min-h-[27rem] w-full max-w-[38rem] items-center justify-center sm:min-h-[34rem]"
         >
           <div
             aria-hidden="true"
-            className="absolute inset-[12%] rounded-full bg-emerald-400/10 blur-[90px]"
+            className="ambient-orb ambient-orb-emerald absolute inset-[12%] rounded-full"
           />
           <div
             aria-hidden="true"
@@ -106,7 +108,7 @@ export function Hero() {
             className="absolute right-[7%] bottom-[16%] size-1.5 transform-gpu rounded-full bg-emerald-200 shadow-[0_0_16px_rgba(110,231,183,0.9)] motion-safe:animate-[medscale-pulse_4s_ease-in-out_infinite]"
           />
 
-          <Parallax className="relative w-[min(100%,31rem)] rotate-[-3deg] transform-gpu rounded-[2rem] border border-white/10 bg-slate-900/65 p-3 shadow-[0_35px_120px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-transform duration-700 hover:rotate-0 sm:p-4">
+          <div className="relative w-[min(100%,31rem)] rotate-[-3deg] transform-gpu rounded-[2rem] border border-white/10 bg-slate-900/85 p-3 shadow-[0_25px_65px_rgba(0,0,0,0.5)] transition-transform duration-700 hover:rotate-0 sm:p-4">
             <div className="overflow-hidden rounded-[1.45rem] border border-white/[0.07] bg-[#0c1518]">
               <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-4">
                 <div className="flex items-center gap-2">
@@ -186,9 +188,9 @@ export function Hero() {
                 </div>
               </div>
             </div>
-          </Parallax>
+          </div>
 
-          <Parallax className="absolute -top-[1%] right-[-2%] flex items-center gap-3 rounded-2xl border border-emerald-200/25 bg-[var(--theme-card)]/90 px-4 py-3 shadow-[0_0_36px_rgba(16,185,129,0.18)] backdrop-blur-xl transition-colors duration-300 hover:border-emerald-200/45 sm:right-[-4%]">
+          <div className="absolute -top-[1%] right-[-2%] flex items-center gap-3 rounded-2xl border border-emerald-200/25 bg-[var(--theme-card)] px-4 py-3 shadow-[0_0_24px_rgba(16,185,129,0.14)] transition-colors duration-300 hover:border-emerald-200/45 sm:right-[-4%]">
             <span className="grid size-9 place-items-center rounded-xl bg-emerald-300/10 text-emerald-200">
               <ChartNoAxesCombined aria-hidden="true" className="size-4" />
             </span>
@@ -200,15 +202,15 @@ export function Hero() {
                 +184%
               </span>
             </span>
-          </Parallax>
+          </div>
 
-          <Parallax className="absolute right-0 bottom-[4%] flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/85 px-4 py-2.5 text-xs text-slate-200 shadow-lg backdrop-blur-xl transition-colors duration-300 hover:border-emerald-300/30 sm:right-[-2%]">
+          <div className="absolute right-0 bottom-[4%] flex gap-2 rounded-full border border-white/10 bg-slate-900 px-4 py-2.5 text-xs text-slate-200 shadow-lg transition-colors duration-300 hover:border-emerald-300/30 sm:right-[-2%]">
             <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-300 opacity-50" />
+              <span className="absolute inline-flex size-full motion-safe:animate-ping rounded-full bg-emerald-300 opacity-50" />
               <span className="relative inline-flex size-2 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(110,231,183,0.85)]" />
             </span>
             <span>Booking Early Watch</span>
-          </Parallax>
+          </div>
           </Reveal>
         </div>
     </section>
