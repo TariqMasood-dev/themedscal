@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import Image from "next/image";
+import { SectionBackgroundRegistration } from "@/components/ui/SectionBackgroundProvider";
 
 const suppliedImages = [
   "Gemini_Generated_Image_496ra5496ra5496r.jfif",
@@ -61,24 +61,7 @@ function resolveImage(src) {
 export function SectionBackground({ src, priority = false }) {
   const imageSource = resolveImage(src);
 
-  return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-    >
-      <div className="section-background-fallback absolute inset-0" />
-      {imageSource ? (
-        <Image
-          src={imageSource}
-          alt=""
-          fill
-          sizes="100vw"
-          preload={priority}
-          loading={priority ? undefined : "lazy"}
-          className="object-cover opacity-75"
-        />
-      ) : null}
-      <div className="section-background-overlay absolute inset-0" />
-    </div>
-  );
+  return imageSource ? (
+    <SectionBackgroundRegistration src={imageSource} priority={priority} />
+  ) : null;
 }

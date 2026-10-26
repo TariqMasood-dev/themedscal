@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/layout/Navbar";
+import { SectionBackgroundProvider } from "@/components/ui/SectionBackgroundProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import "./globals.css";
 import { Inter } from "next/font/google";
@@ -34,10 +35,12 @@ export default function RootLayout({ children }) {
         >
           Skip to content
         </a>
-        <ThemeProvider>
-          <Navbar />
-          {children}
-        </ThemeProvider>
+        <SectionBackgroundProvider>
+          <ThemeProvider>
+            <Navbar />
+            {children}
+          </ThemeProvider>
+        </SectionBackgroundProvider>
       </body>
     </html>
   );
