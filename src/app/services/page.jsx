@@ -10,8 +10,6 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
-import { SectionBackground } from "@/components/ui/SectionBackground";
-import { SceneBackground } from "@/components/canvas/SceneBackground";
 
 export const metadata = {
   title: "Services",
@@ -75,10 +73,6 @@ function ServiceCard({ service, index }) {
 
   return (
     <article className="card-depth group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.09] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.045),0_20px_70px_rgba(0,0,0,0.16)] backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1.5 hover:border-emerald-300/35 hover:bg-slate-900/75 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_26px_80px_rgba(16,185,129,0.1)] focus-within:border-emerald-300/35 sm:p-8">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-28 -right-20 size-64 rounded-full bg-cyan-400/[0.045] blur-[90px] transition-colors duration-500 group-hover:bg-emerald-300/[0.12]"
-      />
       <div className="relative flex h-full flex-col">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -129,14 +123,12 @@ export default function ServicesPage() {
       tabIndex={-1}
       className="relative isolate min-h-screen overflow-x-clip text-slate-100 selection:bg-emerald-300/30"
     >
-      <SceneBackground />
       <div className="relative z-10">
       <section
         aria-labelledby="services-page-heading"
         data-scene="services"
         className="relative isolate overflow-hidden px-5 pt-32 pb-6 sm:px-8 sm:pt-40 lg:px-12 lg:pt-44"
       >
-        <SectionBackground src="/images/services-hero-skincare.avif" />
         <div className="mx-auto max-w-6xl text-center">
           <Reveal className="inline-flex">
           <p className="inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/[0.07] px-3.5 py-2 text-[0.68rem] font-semibold tracking-[0.19em] text-emerald-200 uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-md">
@@ -153,8 +145,7 @@ export default function ServicesPage() {
               "Everything Your Med Spa Needs to ",
               {
                 text: "Grow Online",
-                className:
-                  "bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent",
+                className: "text-emerald-200",
               },
             ]}
           />
@@ -174,7 +165,6 @@ export default function ServicesPage() {
         data-scene="services"
         className="relative isolate overflow-hidden px-0 pb-16 sm:pb-20"
       >
-        <SectionBackground src="/images/services-grid-clinic-detail.webp" />
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-6 py-16 md:grid-cols-2">
           {services.map((service, index) => (
             <Reveal key={service.title} delay={index * 0.1} scale>
@@ -204,16 +194,7 @@ export default function ServicesPage() {
         data-scene="services"
         className="relative isolate overflow-hidden px-5 pb-20 sm:px-8 lg:px-12"
       >
-        <SectionBackground src="/images/services-cta-consultation.webp" />
-        <Reveal scale className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-900 via-[#0c171a] to-[#07100f] px-6 py-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_25px_100px_rgba(0,0,0,0.35)] sm:px-12 sm:py-16">
-          <div
-            aria-hidden="true"
-            className="absolute -top-44 right-[8%] size-80 rounded-full bg-emerald-400/[0.1] blur-[100px]"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute -bottom-52 -left-20 size-72 rounded-full bg-cyan-500/[0.08] blur-[100px]"
-          />
+        <Reveal scale className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900 px-6 py-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_25px_100px_rgba(0,0,0,0.35)] sm:px-12 sm:py-16">
           <div className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
             <div className="max-w-2xl">
               <p className="mb-4 text-xs font-semibold tracking-[0.18em] text-emerald-300 uppercase">

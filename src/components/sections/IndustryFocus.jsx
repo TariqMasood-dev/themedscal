@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
-import { SectionBackground } from "@/components/ui/SectionBackground";
+import { EditorialImage } from "@/components/ui/EditorialImage";
 
 const strengths = [
   {
@@ -38,60 +38,46 @@ const strengths = [
 export function IndustryFocus() {
   return (
     <section
-      data-scene="about"
       aria-labelledby="industry-heading"
-      className="relative isolate flex flex-col justify-center overflow-hidden px-5 py-16 sm:px-8 md:py-24 lg:px-12"
+      className="story-industry"
     >
-      <SectionBackground src="/images/industry-clinic-detail.avif" />
-      <div className="mx-auto w-full max-w-7xl">
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-          <Reveal className="max-w-3xl">
-            <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-emerald-300 uppercase">
-              A different kind of partner
-            </p>
+      <EditorialImage
+        src="/images/industry-clinic-detail.webp"
+        alt="Modern aesthetic treatment room with clean clinical equipment"
+        className="story-industry__image"
+      />
+      <div className="story-wrap">
+        <div className="story-industry__intro">
+          <Reveal>
+            <p className="story-eyebrow">A different kind of partner</p>
             <WordReveal
               as="h2"
               id="industry-heading"
-              className="text-4xl leading-[1.07] font-semibold tracking-[-0.055em] text-white sm:text-6xl"
+              className="story-heading story-industry__heading"
               parts={[
                 "We Understand the Aesthetic ",
-                { text: "Healthcare Industry", className: "text-slate-400" },
+                { text: "Healthcare Industry", className: "story-hero__accent" },
               ]}
             />
-          </Reveal>
-          <Reveal direction="right">
-            <p className="max-w-sm text-sm leading-6 text-slate-400">
-            Your practice deserves creative that understands the care behind
-            every result.
+            <p className="story-industry__description">
+              Your practice deserves creative that understands the care behind
+              every result.
             </p>
           </Reveal>
         </div>
 
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="story-industry__grid">
           {strengths.map(({ title, description, icon: Icon }, index) => (
-            <Reveal key={title} delay={index * 0.1} scale>
-              <article className="card-depth group relative min-h-64 h-full overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.03] p-6 backdrop-blur-xl transition duration-500 hover:scale-[1.025] hover:border-emerald-300/30 hover:bg-white/[0.055]">
-              <div
-                aria-hidden="true"
-                className="absolute -right-16 -bottom-20 size-48 rounded-full bg-cyan-400/[0.04] blur-[65px] transition-colors group-hover:bg-emerald-300/[0.11]"
-              />
-              <div className="relative flex h-full flex-col">
-                <span className="flex items-center justify-between">
-                  <span className="grid size-11 place-items-center rounded-2xl border border-white/10 bg-white/[0.04] text-emerald-200 transition-all group-hover:border-emerald-300/20 group-hover:bg-emerald-300/10">
-                    <Icon aria-hidden="true" className="size-5" />
-                  </span>
-                  <span className="text-[0.65rem] tracking-[0.15em] text-slate-600">
-                    0{index + 1}
-                  </span>
-                </span>
-                <h3 className="mt-auto pt-12 text-lg leading-snug font-medium text-white">
-                  {title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-slate-400">
-                  {description}
-                </p>
-              </div>
-              </article>
+            <Reveal
+              as="article"
+              key={title}
+              delay={index * 0.08}
+              className="story-industry-card"
+            >
+              <Icon aria-hidden="true" className="story-industry-card__icon size-5" />
+              <span className="story-industry-card__index">0{index + 1}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
             </Reveal>
           ))}
         </div>

@@ -38,21 +38,20 @@ export function Navbar() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="navbar-enter absolute inset-x-0 top-0 z-50 border-b border-white/[0.07] bg-black/20 text-white backdrop-blur-lg">
-      <div className="mx-auto flex h-[4.5rem] max-w-[90rem] items-center justify-between gap-4 px-5 sm:h-20 sm:px-8 lg:px-12">
+    <header className="story-nav navbar-enter">
+      <div className="story-nav__inner">
         <Link
           href="/"
           aria-label="MedScale home"
-          className="group inline-flex shrink-0 items-center rounded-sm"
+          className="story-nav__brand"
         >
           <BrandLogo />
         </Link>
 
-        <nav aria-label="Primary navigation" className="hidden lg:block">
-          <ul className="flex items-center gap-7">
+        <nav aria-label="Primary navigation" className="story-nav__desktop">
+          <ul>
             {links.map((link) => {
               const active = isActiveLink(link.label, pathname);
-
               return (
                 <li key={link.href}>
                   <Link
@@ -60,8 +59,8 @@ export function Navbar() {
                     onClick={() => setIsOpen(false)}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "rounded-sm text-[0.78rem] font-medium transition-colors hover:text-emerald-200",
-                      active ? "text-emerald-200" : "text-slate-300",
+                      "story-nav__link",
+                      active && "story-nav__link--active",
                     )}
                   >
                     {link.label}
@@ -72,37 +71,34 @@ export function Navbar() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="story-nav__actions">
           <Button
             variant="ghost"
             type="button"
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
             title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
             onClick={toggleTheme}
-            className="size-10 shrink-0 rounded-full border border-white/10 bg-white/[0.04] text-emerald-200 transition-colors hover:border-emerald-200/30 hover:bg-emerald-300/10 hover:text-emerald-100"
+            className="story-nav__theme"
           >
             {theme === "dark" ? (
-              <Sun aria-hidden="true" className="size-4.5" />
+              <Sun aria-hidden="true" className="size-4" />
             ) : (
-              <Moon aria-hidden="true" className="size-4.5" />
+              <Moon aria-hidden="true" className="size-4" />
             )}
           </Button>
-          <Magnetic className="nav-cta hidden sm:inline-flex">
-            <Link
-              href="/contact"
-              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-emerald-300 px-4 py-2.5 text-xs font-semibold text-slate-950 shadow-[0_0_22px_rgba(52,211,153,0.22)] transition duration-300 hover:bg-emerald-200 hover:shadow-[0_0_34px_rgba(52,211,153,0.4)]"
-            >
-              <span className="absolute inset-0 -translate-x-full bg-white/30 transition-transform duration-700 group-hover:translate-x-full" />
-              <span className="relative">Book Free Consultation</span>
-              <ArrowUpRight aria-hidden="true" className="relative size-4" />
+          <Magnetic className="story-nav__cta-wrap">
+            <Link href="/contact" className="story-nav__cta">
+              <span>Book Free Consultation</span>
+              <ArrowUpRight aria-hidden="true" className="size-4" />
             </Link>
           </Magnetic>
           <Button
             variant="ghost"
+            type="button"
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
             aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="size-10 text-white hover:bg-white/10 lg:hidden"
+            className="story-nav__menu"
             onClick={() => setIsOpen((open) => !open)}
           >
             {isOpen ? (
@@ -118,15 +114,11 @@ export function Navbar() {
         id="mobile-navigation"
         aria-label="Mobile primary navigation"
         hidden={!isOpen}
-        className={cn(
-          "absolute inset-x-0 top-full border-b border-white/10 bg-[var(--theme-card)]/95 px-5 py-4 backdrop-blur-xl lg:hidden",
-          isOpen ? "block" : "hidden",
-        )}
+        className="story-nav__mobile"
       >
-        <ul className="mx-auto flex max-w-[90rem] flex-col">
+        <ul>
           {links.map((link) => {
             const active = isActiveLink(link.label, pathname);
-
             return (
               <li key={link.href}>
                 <Link
@@ -134,10 +126,8 @@ export function Navbar() {
                   onClick={() => setIsOpen(false)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "block rounded-lg px-3 py-3.5 text-sm transition-colors hover:bg-white/5 hover:text-emerald-200",
-                    active
-                      ? "bg-emerald-300/10 text-emerald-200"
-                      : "text-slate-300",
+                    "story-nav__mobile-link",
+                    active && "story-nav__mobile-link--active",
                   )}
                 >
                   {link.label}
@@ -145,12 +135,8 @@ export function Navbar() {
               </li>
             );
           })}
-          <li className="mt-2 sm:hidden">
-            <Link
-              href="/contact"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-between rounded-lg bg-emerald-300 px-4 py-3 text-sm font-semibold text-slate-950"
-            >
+          <li className="story-nav__mobile-cta">
+            <Link href="/contact" onClick={() => setIsOpen(false)}>
               Book Free Consultation
               <ArrowUpRight aria-hidden="true" className="size-4" />
             </Link>

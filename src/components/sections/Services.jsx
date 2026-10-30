@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
-import { SectionBackground } from "@/components/ui/SectionBackground";
+import { EditorialImage } from "@/components/ui/EditorialImage";
 
 const services = [
   {
@@ -69,85 +69,69 @@ export function Services() {
   return (
     <section
       id="services"
-      data-scene="services"
       aria-labelledby="services-heading"
-      className="relative isolate flex flex-col justify-center overflow-hidden px-5 py-16 sm:px-8 md:py-24 lg:px-12"
+      className="story-services"
     >
-      <SectionBackground src="/images/home-services-skincare.webp" />
-      <div className="mx-auto w-full max-w-7xl">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/[0.07] px-3.5 py-2 text-[0.68rem] font-semibold tracking-[0.18em] text-emerald-200 uppercase">
-            <Sparkles aria-hidden="true" className="size-3.5" />
-            Our Services
-          </p>
-          <WordReveal
-            as="h2"
-            id="services-heading"
-            className="text-4xl leading-[1.08] font-semibold tracking-[-0.055em] text-white sm:text-6xl"
-            parts={[
-              "Everything Your Med Spa and Aesthetic Clinic Need to ",
-              { text: "Grow Online", className: "text-slate-400" },
-            ]}
+      <div className="story-wrap">
+        <div className="story-services__intro">
+          <Reveal>
+            <p className="story-eyebrow">
+              <Sparkles aria-hidden="true" className="size-3.5" />
+              Our Services
+            </p>
+            <WordReveal
+              as="h2"
+              id="services-heading"
+              className="story-heading story-services__heading"
+              parts={[
+                "Everything Your Med Spa and Aesthetic Clinic Need to ",
+                { text: "Grow Online", className: "text-emerald-200" },
+              ]}
+            />
+            <p className="story-copy">
+              From strategy to execution — watch content expand online,
+              including: video, editing, and content creation... custom built
+              specifically for premium healthcare practices.
+            </p>
+          </Reveal>
+          <EditorialImage
+            src="/images/home-services-skincare.webp"
+            alt="Skincare products arranged on a natural stone surface"
+            className="story-services__image"
           />
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">
-            From strategy to execution — watch content expand online,
-            including: video, editing, and content creation... custom built
-            specifically for premium healthcare practices.
-          </p>
-        </Reveal>
+        </div>
 
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
+        <div className="story-services__list">
           {services.map(({ title, description, bullets, icon: Icon, index }) => (
-            <Reveal key={title} delay={Number(index) * 0.1} scale>
-              <article className="card-depth group relative h-full overflow-hidden rounded-3xl border border-white/[0.08] bg-slate-900/55 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-emerald-300/40 hover:shadow-[0_18px_70px_rgba(16,185,129,0.09)] sm:p-8">
-              <div
-                aria-hidden="true"
-                className="absolute -top-28 -right-24 size-64 rounded-full bg-cyan-400/[0.05] blur-[90px] transition duration-500 group-hover:bg-emerald-300/[0.11]"
-              />
-              <div className="relative">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="grid size-12 shrink-0 place-items-center rounded-2xl border border-emerald-300/15 bg-emerald-300/[0.07] text-emerald-200 transition-colors group-hover:border-emerald-200/30 group-hover:bg-emerald-200/15">
-                    <Icon
-                      aria-hidden="true"
-                      className="size-5"
-                      strokeWidth={1.7}
-                    />
-                  </div>
-                  <span className="text-xs tracking-[0.16em] text-slate-600">
-                    {index} / 04
-                  </span>
-                </div>
-                <h3 className="mt-6 text-xl font-medium tracking-tight text-white sm:text-2xl">
-                  {title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-slate-400">
-                  {description}
-                </p>
-                <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
-                  {bullets.map((bullet, bulletIndex) => (
-                    <Reveal
-                      as="li"
-                      key={bullet}
-                      delay={Number(index) * 0.1 + bulletIndex * 0.05}
-                      className="flex items-start gap-2.5 text-xs leading-5 text-slate-300 sm:text-[0.8rem]"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="mt-1.5 size-1.5 shrink-0 rounded-full bg-emerald-300 shadow-[0_0_10px_rgba(110,231,183,0.6)]"
-                      />
-                      {bullet}
-                    </Reveal>
+            <Reveal
+              as="article"
+              key={title}
+              delay={Number(index) * 0.08}
+              className="story-service"
+            >
+              <div>
+                <span className="story-service__icon">
+                  <Icon aria-hidden="true" className="size-5" strokeWidth={1.7} />
+                </span>
+                <span className="story-service__index">{index} / 04</span>
+              </div>
+              <div className="story-service__content">
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <ul className="story-service__bullets">
+                  {bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
                   ))}
                 </ul>
               </div>
-              </article>
             </Reveal>
           ))}
         </div>
-        <div className="mt-9 flex justify-center">
+
+        <div>
           <Link
             href="/services"
-            className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-emerald-200/20 bg-emerald-300/[0.06] px-5 py-2.5 text-sm font-medium text-emerald-100 transition duration-300 hover:-translate-y-0.5 hover:border-emerald-200/40 hover:bg-emerald-300/[0.12]"
+            className="story-services__link"
           >
             Explore All Services
             <ArrowUpRight

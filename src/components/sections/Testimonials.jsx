@@ -1,7 +1,7 @@
 import { Quote, Star } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { WordReveal } from "@/components/ui/WordReveal";
-import { SectionBackground } from "@/components/ui/SectionBackground";
+import { EditorialImage } from "@/components/ui/EditorialImage";
 
 const metrics = [
   { value: "6", label: "Social Platforms Managed" },
@@ -32,23 +32,21 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      data-scene="testimonials"
       aria-labelledby="testimonials-heading"
-      className="relative isolate flex flex-col justify-center overflow-hidden px-5 py-16 sm:px-8 md:py-24 lg:px-12"
+      className="story-proof"
     >
-      <SectionBackground src="/images/home-testimonial-texture.webp" />
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="story-wrap">
         <Reveal
           as="dl"
           aria-label="MedScale at a glance"
-          className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.08] md:grid-cols-4"
+          className="story-proof__metrics"
         >
           {metrics.map(({ value, label }, index) => (
             <Reveal
               as="div"
               key={label}
               delay={index * 0.08}
-              className="bg-[var(--theme-page)]/90 px-5 py-6 backdrop-blur-xl sm:px-7 sm:py-8"
+              className="story-metric"
             >
               <dd className="text-3xl font-semibold tracking-[-0.055em] text-white sm:text-4xl">
                 {value}
@@ -60,74 +58,67 @@ export function Testimonials() {
           ))}
         </Reveal>
 
-        <div className="mt-16 flex flex-col gap-4 sm:mt-20 sm:flex-row sm:items-end sm:justify-between">
+        <div className="story-testimonials__intro">
           <Reveal>
-            <p className="mb-4 text-xs font-semibold tracking-[0.2em] text-emerald-300 uppercase">
-              Trusted partner
-            </p>
+            <p className="story-eyebrow">Trusted partner</p>
             <WordReveal
               as="h2"
               id="testimonials-heading"
-              className="text-4xl leading-[1.07] font-semibold tracking-[-0.055em] text-white sm:text-6xl"
+              className="story-heading story-testimonials__heading"
               parts={[
                 "Trusted by Growing ",
-                { text: "Med Spas", className: "text-slate-400" },
+                { text: "Med Spas", className: "text-emerald-200" },
               ]}
             />
           </Reveal>
           <Reveal direction="right">
-            <p className="pb-1 text-sm text-slate-400">
-            The work speaks for itself.
-            </p>
+            <p className="story-testimonials__note">The work speaks for itself.</p>
           </Reveal>
         </div>
 
-        <div className="mt-9 grid gap-4 lg:grid-cols-3">
-          {testimonials.map(({ quote, name }, index) => (
-            <Reveal key={name} delay={index * 0.1} scale>
-              <figure className="card-depth group relative flex min-h-64 h-full flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.035] p-6 backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:border-emerald-300/30 hover:bg-white/[0.06] sm:p-7">
-              <div
-                aria-hidden="true"
-                className="absolute -top-24 -right-16 size-48 rounded-full bg-emerald-300/[0.045] blur-[65px] transition-all duration-500 group-hover:bg-emerald-300/[0.12]"
-              />
-              <div className="relative flex items-center justify-between">
-                <Quote
-                  aria-hidden="true"
-                  className="size-5 text-emerald-300/80"
-                  strokeWidth={1.6}
-                />
-                <div
-                  role="img"
-                  aria-label="5 out of 5 stars"
-                  className="flex gap-1 text-emerald-200"
-                >
-                  {Array.from({ length: 5 }, (_, index) => (
-                    <Star
-                      key={index}
-                      aria-hidden="true"
-                      className="size-3.5 fill-current"
-                    />
-                  ))}
+        <div className="story-testimonials__body">
+          <EditorialImage
+            src="/images/home-testimonial-texture.webp"
+            alt="Soft water ripples catching reflected light"
+            className="story-testimonials__image"
+          />
+          <div className="story-testimonials__list">
+            {testimonials.map(({ quote, name }, index) => (
+              <Reveal
+                as="figure"
+                key={name}
+                delay={index * 0.08}
+                className="story-quote"
+              >
+                <Quote aria-hidden="true" className="story-quote__mark size-5" strokeWidth={1.6} />
+                <div>
+                  <div
+                    role="img"
+                    aria-label="5 out of 5 stars"
+                    className="story-quote__rating"
+                  >
+                    {Array.from({ length: 5 }, (_, starIndex) => (
+                      <Star
+                        key={starIndex}
+                        aria-hidden="true"
+                        className="size-3.5 fill-current"
+                      />
+                    ))}
+                  </div>
+                  <blockquote>“{quote}”</blockquote>
+                  <figcaption>
+                    <span aria-hidden="true" className="story-quote__avatar">
+                      {name
+                        .split(" ")
+                        .map((word) => word[0])
+                        .join("")}
+                    </span>
+                    <span>{name}</span>
+                  </figcaption>
                 </div>
-              </div>
-              <blockquote className="relative mt-7 flex-1 text-sm leading-7 text-slate-300 sm:text-[0.95rem]">
-                “{quote}”
-              </blockquote>
-              <figcaption className="relative mt-7 flex items-center gap-3 border-t border-white/[0.08] pt-4">
-                <span
-                  aria-hidden="true"
-                  className="grid size-9 place-items-center rounded-full border border-emerald-300/20 bg-emerald-300/10 text-[0.62rem] font-semibold text-emerald-200"
-                >
-                  {name
-                    .split(" ")
-                    .map((word) => word[0])
-                    .join("")}
-                </span>
-                <span className="text-sm font-medium text-white">{name}</span>
-              </figcaption>
-              </figure>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

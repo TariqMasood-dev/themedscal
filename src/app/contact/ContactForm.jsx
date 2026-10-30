@@ -146,7 +146,7 @@ export function ContactForm() {
         <Magnetic className="w-full sm:w-auto">
           <button
             type="submit"
-            className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-300 to-teal-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_28px_rgba(52,211,153,0.2)] transition duration-300 hover:from-emerald-200 hover:to-teal-200 hover:shadow-[0_0_40px_rgba(52,211,153,0.36)] sm:w-auto"
+            className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_28px_rgba(52,211,153,0.2)] transition duration-300 hover:bg-emerald-200 hover:shadow-[0_0_40px_rgba(52,211,153,0.36)] sm:w-auto"
           >
             Send Message
             <ArrowUpRight

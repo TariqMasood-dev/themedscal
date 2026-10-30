@@ -5,8 +5,6 @@ import { Footer } from "@/components/layout/Footer";
 import { Reveal } from "@/components/ui/Reveal";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { WordReveal } from "@/components/ui/WordReveal";
-import { SectionBackground } from "@/components/ui/SectionBackground";
-import { SceneBackground } from "@/components/canvas/SceneBackground";
 
 export const metadata = {
   title: "Frequently Asked Questions",
@@ -54,14 +52,12 @@ export default function FaqPage() {
       tabIndex={-1}
       className="relative isolate min-h-screen overflow-x-clip text-slate-100 selection:bg-emerald-300/30"
     >
-      <SceneBackground />
       <div className="relative z-10">
       <section
         aria-labelledby="faq-page-heading"
         data-scene="faq"
         className="relative isolate overflow-hidden px-5 pt-32 pb-4 sm:px-8 sm:pt-40 lg:px-12 lg:pt-44"
       >
-        <SectionBackground src="/images/faq-hero-water-light.avif" />
         <div className="mx-auto max-w-4xl text-center">
           <Reveal className="inline-flex">
           <p className="inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/[0.07] px-3.5 py-2 text-[0.68rem] font-semibold tracking-[0.19em] text-emerald-200 uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-md">
@@ -78,8 +74,7 @@ export default function FaqPage() {
               "Frequently Asked ",
               {
                 text: "Questions",
-                className:
-                  "bg-gradient-to-r from-emerald-200 via-teal-100 to-cyan-200 bg-clip-text text-transparent",
+                className: "text-emerald-200",
               },
             ]}
           />
@@ -97,7 +92,6 @@ export default function FaqPage() {
         data-scene="faq"
         className="relative isolate overflow-hidden px-0 pb-16 sm:pb-20"
       >
-        <SectionBackground src="/images/faq-content-serene-room.webp" />
         <Reveal className="mx-auto max-w-4xl px-6 py-12 sm:py-16">
           <LazyFaqAccordion items={faqItems} />
         </Reveal>
@@ -108,16 +102,7 @@ export default function FaqPage() {
         data-scene="faq"
         className="relative isolate overflow-hidden px-5 pb-20 sm:px-8 lg:px-12"
       >
-        <SectionBackground src="/images/faq-cta-consultation.webp" />
-        <Reveal scale className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-emerald-200/20 bg-gradient-to-br from-slate-900 via-[#0c171a] to-[#07100f] px-6 py-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_25px_100px_rgba(0,0,0,0.35),0_0_55px_rgba(16,185,129,0.08)] sm:px-12 sm:py-16">
-          <div
-            aria-hidden="true"
-            className="absolute -top-44 right-[8%] size-80 rounded-full bg-emerald-400/[0.12] blur-[100px]"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute -bottom-52 -left-20 size-72 rounded-full bg-cyan-500/[0.09] blur-[100px]"
-          />
+        <Reveal scale className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-emerald-200/20 bg-slate-900 px-6 py-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_25px_100px_rgba(0,0,0,0.35),0_0_55px_rgba(16,185,129,0.08)] sm:px-12 sm:py-16">
           <div className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
             <div className="max-w-2xl">
               <h2

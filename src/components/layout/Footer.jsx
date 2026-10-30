@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { BrandLogo } from "@/components/layout/BrandLogo";
-import { SectionBackground } from "@/components/ui/SectionBackground";
+import { EditorialImage } from "@/components/ui/EditorialImage";
 
 const footerLinks = [
   { href: "/#home", label: "Home" },
@@ -19,46 +19,40 @@ export function Footer({ showCallout = true }) {
   return (
     <footer
       id="contact"
-      data-scene="contact"
-      className="relative isolate flex flex-col justify-between overflow-hidden bg-black px-5 py-16 sm:px-8 lg:px-12"
+      className="story-footer"
     >
-      <SectionBackground src="/images/footer-spa-reception.webp" />
-      <div
-        aria-hidden="true"
-        className="ambient-orb ambient-orb-emerald absolute top-[-20rem] left-1/2 size-[38rem] -translate-x-1/2 rounded-full"
-      />
-      <div className="relative mx-auto w-full max-w-[90rem]">
-        {showCallout && (
-          <Reveal
-            scale
-            className="flex flex-col items-start justify-between gap-7 border-b border-white/10 pb-12 sm:flex-row sm:items-end sm:pb-14"
-          >
+      {showCallout && (
+        <div className="story-footer__banner">
+          <EditorialImage
+            src="/images/footer-spa-reception.webp"
+            alt="Sunlit spa reception with natural textures"
+            className="story-footer__image"
+            reveal={false}
+          />
+          <Reveal className="story-footer__callout">
             <div>
-              <p className="mb-4 text-xs font-semibold tracking-[0.2em] text-emerald-300 uppercase">
+              <p className="story-eyebrow">
                 Your next chapter starts here
               </p>
-              <h2 className="max-w-3xl text-4xl leading-[1.04] font-semibold tracking-[-0.055em] text-white sm:text-6xl">
+              <h2 className="story-heading story-footer__heading">
                 Ready to Grow Your Med Spa?
               </h2>
             </div>
-            <Magnetic className="shrink-0">
+            <Magnetic className="story-footer__cta-wrap">
               <Link
                 href="/contact"
-                className="group relative inline-flex min-h-12 items-center gap-2 overflow-hidden rounded-full bg-emerald-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(52,211,153,0.2)] transition duration-300 hover:bg-emerald-200 hover:shadow-[0_0_42px_rgba(52,211,153,0.4)]"
+                className="story-button story-button--solid"
               >
-                <span className="absolute inset-0 -translate-x-full bg-white/30 transition-transform duration-700 group-hover:translate-x-full" />
-                <span className="relative">Book a Free Consultation</span>
-                <ArrowUpRight aria-hidden="true" className="relative size-4" />
+                <span>Book a Free Consultation</span>
+                <ArrowUpRight aria-hidden="true" className="size-4" />
               </Link>
             </Magnetic>
           </Reveal>
-        )}
+        </div>
+      )}
 
-        <Reveal
-          className={`grid gap-10 md:grid-cols-[1fr_1.4fr_1fr] md:gap-12 ${
-            showCallout ? "py-10" : "pt-4"
-          }`}
-        >
+      <Reveal className="story-footer__layout">
+        <div className="story-footer__brand">
           <Reveal delay={0.05}>
             <Link
               href="/"
@@ -72,67 +66,52 @@ export function Footer({ showCallout = true }) {
             </p>
           </Reveal>
 
-          <Reveal as="nav" delay={0.12} aria-label="Footer navigation">
-            <p className="mb-4 text-xs font-semibold tracking-[0.16em] text-slate-300 uppercase">
+        </div>
+        <Reveal as="nav" delay={0.12} aria-label="Footer navigation">
+            <p className="story-footer__group-title">
               Quick Links
             </p>
-            <ul className="grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-3">
+            <ul className="story-footer__links">
               {footerLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-slate-400 transition-colors hover:text-emerald-200"
-                  >
+                  <Link href={link.href}>
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </Reveal>
+        </Reveal>
 
-          <Reveal delay={0.2}>
-            <p className="mb-4 text-xs font-semibold tracking-[0.16em] text-slate-300 uppercase">
+        <Reveal delay={0.2} className="story-footer__contact">
+            <p className="story-footer__group-title">
               Contact
             </p>
-            <ul className="space-y-2 text-sm text-slate-400">
+            <ul>
               <li>
-                <a
-                  href="mailto:shoaib@themedscale.com"
-                  className="transition-colors hover:text-emerald-200"
-                >
+                <a href="mailto:shoaib@themedscale.com">
                   shoaib@themedscale.com
                 </a>
               </li>
               <li>
-                <a
-                  href="tel:+923392106075"
-                  className="transition-colors hover:text-emerald-200"
-                >
+                <a href="tel:+923392106075">
                   +92 3392106075
                 </a>
               </li>
             </ul>
             <Link
               href="/contact"
-              className="group mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-200 transition-colors hover:text-emerald-100"
+              className="story-footer__contact-cta"
             >
               Book a Free Consultation
-              <ArrowUpRight
-                aria-hidden="true"
-                className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
+              <ArrowUpRight aria-hidden="true" className="size-3.5" />
             </Link>
-          </Reveal>
         </Reveal>
+      </Reveal>
 
-        <Reveal
-          scale
-          className="flex flex-col gap-2 border-t border-white/10 pt-5 text-xs text-slate-600 sm:flex-row sm:items-center sm:justify-between"
-        >
-          <p>© 2026 MedScale. All rights reserved.</p>
-          <p>Made for aesthetic healthcare.</p>
-        </Reveal>
-      </div>
+      <Reveal scale className="story-footer__legal">
+        <p>© 2026 MedScale. All rights reserved.</p>
+        <p>Made for aesthetic healthcare.</p>
+      </Reveal>
     </footer>
   );
 }

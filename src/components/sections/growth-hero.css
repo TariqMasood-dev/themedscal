@@ -1,0 +1,17 @@
+.growth-hero__copy {
+  width: min(100%, 59rem);
+}
+
+.growth-hero__cta-wrap {
+  width: auto;
+}
+
+@media (max-width: 680px) {
+  .growth-hero__cta-wrap {
+    width: 100%;
+  }
+
+  .growth-hero__cta-wrap .story-button {
+    width: 100%;
+  }
+}

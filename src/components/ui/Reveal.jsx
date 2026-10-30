@@ -53,7 +53,7 @@ export function Reveal({
   const elementRef = useRef(null);
   useEffect(() => {
     const element = elementRef.current;
-    if (!element) return;
+    if (!element || element.closest(".story-experience")) return undefined;
     return observeOnce(element);
   }, []);
 
@@ -69,38 +69,28 @@ export function Reveal({
     "aria-hidden": ariaHidden,
     className,
     style,
-  };
-  const setElement = (element) => {
-    elementRef.current = element;
+    ref: elementRef,
   };
 
   if (as === "li") {
-    return (
-      <li ref={setElement} {...commonProps}>
-        {children}
-      </li>
-    );
+    return <li {...commonProps}>{children}</li>;
   }
 
   if (as === "nav") {
-    return (
-      <nav ref={setElement} {...commonProps}>
-        {children}
-      </nav>
-    );
+    return <nav {...commonProps}>{children}</nav>;
   }
 
   if (as === "dl") {
-    return (
-      <dl ref={setElement} {...commonProps}>
-        {children}
-      </dl>
-    );
+    return <dl {...commonProps}>{children}</dl>;
   }
 
-  return (
-    <div ref={setElement} {...commonProps}>
-      {children}
-    </div>
-  );
+  if (as === "article") {
+    return <article {...commonProps}>{children}</article>;
+  }
+
+  if (as === "figure") {
+    return <figure {...commonProps}>{children}</figure>;
+  }
+
+  return <div {...commonProps}>{children}</div>;
 }

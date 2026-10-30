@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
-import { SectionBackgroundProvider } from "@/components/ui/SectionBackgroundProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import "./globals.css";
+import "@/components/sections/homepage-experience.css";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -35,12 +35,10 @@ export default function RootLayout({ children }) {
         >
           Skip to content
         </a>
-        <SectionBackgroundProvider>
-          <ThemeProvider>
-            <Navbar />
-            {children}
-          </ThemeProvider>
-        </SectionBackgroundProvider>
+        <ThemeProvider>
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
